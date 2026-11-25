@@ -4,60 +4,66 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Ücretsiz Doğum Haritası Yorumu · SobeAstro</title>
-<meta name="description" content="Doğum haritanı hesapla: yükselenin, geçmiş yaşamın, bu hayattaki sınavın ve döngü yılların.">
+<meta name="description" content="Doğum haritanı hesapla: yükselenin, geçmiş hayatların, haritandaki en belirgin işaret ve döngü yılların.">
 <meta property="og:title" content="✦ Ücretsiz Doğum Haritası Yorumu · SobeAstro">
-<meta property="og:description" content="Yükselenin, geçmiş yaşamın, bu hayattaki sınavın ve döngü yılların. 1 dakikada kartını al ✨">
+<meta property="og:description" content="Geçmiş hayatında kimdin? Haritandaki en belirgin işaret ne? 1 dakikada kartını al ✨">
 <meta property="og:image" content="https://harita.joinsobe.com/kapak.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:url" content="https://harita.joinsobe.com/">
 <meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
 <style>
-:root{--zemin:#0d0b1e;--kart:#16132e;--altin:#e8c46a;--acik:#f6ecd0;--pembe:#e07aa8;--yazi:#efe9f6;--soluk:#a49cc0}
+:root{--kagit:#efe4cf;--kagit2:#e6d7bb;--murekkep:#2a241f;--soluk:#7a6d5c;--altin:#a87a2a;--cizgi:#2a241f33}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:radial-gradient(120% 80% at 50% 0%,#241d4d 0%,var(--zemin) 60%);color:var(--yazi);font-family:Poppins,sans-serif;min-height:100vh;display:flex;justify-content:center}
-main{width:100%;max-width:460px;padding:28px 18px 60px}
-.yildiz{position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(1px 1px at 20% 30%,#fff8 50%,transparent 51%),radial-gradient(1px 1px at 70% 20%,#fff6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 40% 70%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 85% 60%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 10% 85%,#fff6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 60% 90%,#e8c46a88 50%,transparent 51%)}
-h1{font-family:"Cormorant Garamond",serif;font-size:38px;line-height:1.05;text-align:center;color:var(--acik);margin:10px 0 8px}
-h1 em{color:var(--altin);font-style:italic}
-.alt{color:var(--soluk);text-align:center;font-size:14px;margin-bottom:22px}
+body{background:var(--kagit) radial-gradient(120% 70% at 50% 0%,#f6eedd 0%,var(--kagit) 55%,var(--kagit2) 100%);color:var(--murekkep);font-family:Poppins,sans-serif;min-height:100vh;display:flex;justify-content:center}
+main{width:100%;max-width:460px;padding:22px 18px 60px}
+.logo{display:block;width:96px;height:96px;margin:0 auto 6px;border-radius:50%}
+h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:38px;line-height:1.05;text-align:center;margin:6px 0 8px}
+h1 em{color:var(--altin)}
+.alt{color:var(--soluk);text-align:center;font-size:14px;margin-bottom:20px}
 .adim{display:none;animation:gel .4s ease}.adim.acik{display:block}
 @keyframes gel{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.ilerleme{height:4px;background:#ffffff18;border-radius:4px;margin-bottom:22px;overflow:hidden}.ilerleme i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pembe),var(--altin));transition:width .4s}
+.ilerleme{height:3px;background:var(--cizgi);border-radius:3px;margin-bottom:18px;overflow:hidden}.ilerleme i{display:block;height:100%;width:0;background:var(--altin);transition:width .4s}
 label{display:block;font-size:13px;color:var(--soluk);margin:14px 0 6px}
-input,select{width:100%;padding:14px;border-radius:14px;border:1px solid #ffffff22;background:#ffffff0d;color:var(--yazi);font:inherit;font-size:16px}
-select option{background:#16132e}
+input,select{width:100%;padding:14px;border-radius:12px;border:1px solid var(--cizgi);background:#fffaf0;color:var(--murekkep);font:inherit;font-size:16px}
 .satir{display:flex;gap:10px}.satir>div{flex:1}
-.kutu{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--soluk);margin-top:10px}.kutu input{width:auto}
-button{width:100%;margin-top:22px;padding:16px;border:0;border-radius:16px;background:linear-gradient(90deg,var(--altin),#f3dc9a);color:#1b1533;font:600 16px Poppins,sans-serif;cursor:pointer}
-button.ikinci{background:transparent;color:var(--altin);border:1px solid var(--altin);margin-top:10px}
-.soru{font-family:"Cormorant Garamond",serif;font-size:28px;line-height:1.15;color:var(--acik);margin-bottom:16px}
-.secim{display:block;width:100%;text-align:left;margin:10px 0 0;padding:16px;border-radius:14px;background:#ffffff0d;border:1px solid #ffffff22;color:var(--yazi);font:400 15px Poppins,sans-serif}
-.secim:active,.secim.sec{border-color:var(--altin);background:#e8c46a22}
-.analiz{text-align:center;padding:60px 0}
-.halka{width:140px;height:140px;margin:0 auto 26px;border-radius:50%;border:2px dashed var(--altin);animation:don 6s linear infinite;position:relative}
-.halka:after{content:"✦";position:absolute;inset:0;display:grid;place-items:center;font-size:40px;color:var(--altin);animation:don 6s linear infinite reverse}
+.kutu{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--soluk);margin-top:10px}.kutu input{width:auto;margin-top:3px}
+button{width:100%;margin-top:20px;padding:16px;border:0;border-radius:14px;background:var(--murekkep);color:#f6eedd;font:600 16px Poppins,sans-serif;cursor:pointer}
+.soru{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:30px;line-height:1.15;margin-bottom:14px}
+.secim{display:block;text-align:left;margin:10px 0 0;padding:16px;border-radius:12px;background:#fffaf0;border:1px solid var(--cizgi);color:var(--murekkep);font:400 15px Poppins,sans-serif}
+.secim.sec{border-color:var(--altin);background:#f3e2bf}
+.analiz{text-align:center;padding:50px 0}
+.analiz img{width:150px;height:150px;border-radius:50%;animation:don 8s linear infinite}
 @keyframes don{to{transform:rotate(360deg)}}
-#analizYazi{color:var(--soluk);min-height:22px}
-canvas{width:100%;border-radius:18px;display:block;box-shadow:0 20px 60px #0008}
+#analizYazi{color:var(--soluk);margin-top:22px;min-height:22px}
+canvas{width:100%;border-radius:16px;display:block;box-shadow:0 18px 50px #5a43282e}
+.paylas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.paylas button{margin:0;padding:13px;font-size:14px}
+.paylas .ikinci{background:#fffaf0;color:var(--murekkep);border:1px solid var(--cizgi)}
+.paylas .tam{grid-column:1/3}
+.bolum{background:#fffaf0;border:1px solid var(--cizgi);border-radius:16px;padding:18px;margin-top:16px}
+.bolum h3{font-family:"Cormorant Garamond",serif;font-weight:700;font-size:24px;margin-bottom:6px}
+.bolum h4{font-size:12px;letter-spacing:2px;color:var(--altin);margin-bottom:4px}
+.bolum p{font-size:14px;line-height:1.6;color:#4a4035}
+.bolum p+p{margin-top:8px}
+.roller{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.roller span{font-size:13px;background:#f3e2bf;border-radius:20px;padding:4px 10px}
 .not{font-size:12px;color:var(--soluk);text-align:center;margin-top:12px}
-.rapor{background:var(--kart);border:1px solid #ffffff1a;border-radius:18px;padding:18px;margin-top:22px}
-.rapor h3{font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--altin);margin-bottom:6px}
-.rapor p{font-size:14px;color:var(--soluk);line-height:1.5}
-.tamam{color:#9fe3c4;text-align:center;margin-top:14px;font-size:14px}
-.hata{color:#ff9a9a;font-size:13px;margin-top:8px;min-height:18px}
+.tamam{color:#3d7a5a;text-align:center;margin-top:12px;font-size:14px}
+.hata{color:#b0413e;font-size:13px;margin-top:8px;min-height:18px}
+.bildirim{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--murekkep);color:#f6eedd;padding:10px 16px;border-radius:20px;font-size:13px;opacity:0;transition:.3s;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="yildiz"></div>
 <main>
   <div class="ilerleme"><i id="bar"></i></div>
 
   <section class="adim acik" id="a0">
+    <img class="logo" src="logo.png" alt="SobeAstro">
     <h1>Ücretsiz <em>Doğum Haritası</em> Yorumu</h1>
-    <p class="alt">Yükselenin, geçmiş yaşamın, bu hayattaki sınavın ve döngü yılların ✦</p>
+    <p class="alt">Geçmiş hayatında kimdin? Haritandaki en belirgin işaret ne? Hangi döngünün içindesin? ✦</p>
     <label>Doğum tarihin</label><input type="date" id="tarih" max="2026-12-31">
     <div class="satir"><div><label>Doğum saatin</label><input type="time" id="saat"></div><div><label>Doğduğun şehir</label><select id="sehir"></select></div></div>
     <div class="kutu"><input type="checkbox" id="saatYok"><span>Doğum saatimi bilmiyorum</span></div>
@@ -67,139 +73,236 @@ canvas{width:100%;border-radius:18px;display:block;box-shadow:0 20px 60px #0008}
   </section>
 
   <section class="adim" id="a1"><p class="soru">Hayatının hangi alanında tekrar eden bir döngü hissediyorsun?</p><div data-s="alan"></div></section>
-  <section class="adim" id="a2"><p class="soru">Geçmişte yarım kalmış, bitmemiş bir hikâyen var mı?</p><div data-s="hikaye"></div></section>
+  <section class="adim" id="a2"><p class="soru">Bazı yerlere, insanlara ya da zamanlara açıklayamadığın bir yakınlık duyar mısın?</p><div data-s="dejavu"></div></section>
   <section class="adim" id="a3"><p class="soru">Şu an en çok neye ihtiyacın var?</p><div data-s="ihtiyac"></div></section>
 
-  <section class="adim" id="a4"><div class="analiz"><div class="halka"></div><p id="analizYazi">Gökyüzü hesaplanıyor…</p></div></section>
+  <section class="adim" id="a4"><div class="analiz"><img src="logo.png" alt=""><p id="analizYazi">Gökyüzü hesaplanıyor…</p></div></section>
 
   <section class="adim" id="a5">
     <canvas id="kart" width="1080" height="1920"></canvas>
-    <button onclick="paylas()">Hikâyende paylaş ✦</button>
-    <div class="rapor">
+    <div class="paylas">
+      <button class="tam" onclick="paylas()">Kartımı paylaş ✦</button>
+      <button class="ikinci" onclick="whatsapp()">WhatsApp'ta gönder</button>
+      <button class="ikinci" onclick="indir()">Kartı indir</button>
+      <button class="ikinci tam" onclick="kopyala()">Arkadaşına link gönder (kopyala)</button>
+    </div>
+    <div id="detay"></div>
+    <div class="bolum">
       <h3>Tam raporun hazır</h3>
-      <p>12 yıllık döngü haritan, geçmiş yaşam ve sınav yorumunun uzun hâli, bu yıl için özel ritüel. E-postana gönderelim.</p>
+      <p>Haritandaki bütün güçlü açılar, 12 yıllık döngü haritan (hangi yıl hangi alan) ve sana özel ritüel. E-postana gönderelim.</p>
       <label>E-posta adresin</label><input type="email" id="eposta" placeholder="ornek@mail.com">
       <div class="kutu"><input type="checkbox" id="izin" checked><span>Raporumun ve dolunay/yeni ay notlarının gönderilmesine izin veriyorum.</span></div>
       <div class="hata" id="hata5"></div>
       <button onclick="gonder()">Tam raporumu gönder</button>
       <p class="tamam" id="tamam" style="display:none">Raporun yolda 💌 Gelen kutunu (ve spam klasörünü) kontrol et.</p>
     </div>
-    <p class="not">Bu yorum ruhsal astroloji geleneğine dayanır; eğlence ve iç gözlem amaçlıdır.</p>
+    <p class="not">Bu yorum ruhsal (karmik) astroloji geleneğine dayanır; eğlence ve iç gözlem amaçlıdır, sağlık ya da gelecek hakkında kesin bilgi vermez.</p>
   </section>
 </main>
+<div class="bildirim" id="bildirim"></div>
 <script>
+const SITE = "https://harita.joinsobe.com";
 const GONDER_URL = "https://script.google.com/macros/s/AKfycbxxDti4PUAc_KbgDgXNw9fHVPnMR280rlS6qwKxrMAYrkkZbOOlJeGBqmwWWSYdsBFh0g/exec";
 const BURC = ["Koç","Boğa","İkizler","Yengeç","Aslan","Başak","Terazi","Akrep","Yay","Oğlak","Kova","Balık"];
 const SEMBOL = ["♈","♉","♊","♋","♌","♍","♎","♏","♐","♑","♒","♓"];
-const YUK = ["cesur ve ilk adımı atan biri","sakin ve güven veren biri","meraklı, konuşkan, hızlı düşünen biri","şefkatli ve koruyucu biri","parlayan, sıcak ve dikkat çeken biri","özenli ve yardımsever biri","zarif, uyumlu ve adil biri","yoğun, gizemli ve derin biri","özgür ruhlu ve iyimser biri","ciddi, olgun ve kararlı biri","farklı, bağımsız ve yenilikçi biri","hassas, sezgisel ve rüya gibi biri"];
-const GUNEY = [["Savaşçı","Geçmişte hep tek başına savaştın; kendi ayakların üzerinde durmayı çok iyi biliyorsun."],["Toprak Bekçisi","Güvenliği, düzeni ve sahip olduklarını korumakla geçen yaşamlardan geliyorsun."],["Haberci","Bilgi taşıdın, çok konuştun, çok öğrendin; ama hep bir sonraki bilgiye koştun."],["Ailenin Kalbi","Ev, aile ve başkalarını korumak senin görevindi; herkesin sığınağı sendin."],["Sahnedeki Işık","Sevilmek, görülmek ve alkışlanmak için yaşadın; ışığın hep başkalarının gözündeydi."],["Şifacı","Başkalarına hizmet ettin, kusursuz olmaya çalıştın; kendine hep en son sıra geldi."],["Arabulucu","İlişkiler ve uyum için kendinden vazgeçtin; herkesi memnun etmeye çalıştın."],["Gizemli Şifacı","Krizlerden, sırlardan ve büyük dönüşümlerden geçtin; derinlik sende eski bir bilgi."],["Gezgin Bilge","İnanç, yol ve öğreti peşinde dolaştın; cevabı hep uzaklarda aradın."],["Lider","Sorumluluk ve görev yükünü taşıdın; güçlü görünmek zorundaydın."],["Asi Mucit","Fikirler ve topluluk için yaşadın; duygularına hep biraz mesafeli kaldın."],["Mistik","İnziva, inanç ve fedakârlıkla geçen yaşamlardan geliyorsun; başkalarının acısını taşıdın."]];
-const KUZEY = ["Kendi adına cesaretle karar vermek ve gönül rahatlığıyla “ben” diyebilmek.","Yavaşlamak, kendi değerini ve huzurunu taş taş inşa etmek.","Tek doğruyu bırakıp merak etmek: sormak, dinlemek, öğrenmek.","Duygularını göstermek, kök salmak ve kırılgan olabilmeye izin vermek.","Kalabalığın içinden çıkıp kendi ışığını göstermek, yaratmak.","Hayalden gerçeğe inmek; düzen kurmak ve bedenine iyi bakmak.","Tek başına savaşmayı bırakıp birlikte olmayı, paylaşmayı öğrenmek.","Derin bağ kurmak, kontrolü bırakmak ve değişime teslim olmak.","Kendi doğrunu bulmak, ufkunu genişletmek ve hayata inanmak.","Sorumluluğu üstlenmek ve kendi hayatının otoritesi olmak.","Kişisel dramlardan çıkıp topluluk içinde özgün sesini bulmak.","Kontrolü bırakmak, sezgine ve akışa güvenmek."];
+const YUK = ["Dünyaya cesur, hızlı ve ilk adımı atan biri olarak görünürsün; insanlar enerjini hemen fark eder.","Sakin, güven veren ve zevkli bir duruşun var; yanındakiler kendini güvende hisseder.","Meraklı, esprili ve hızlı düşünen biri olarak görünürsün; sohbetin çekicidir.","Şefkatli ve koruyucu bir enerjin var; insanlar sana kolayca açılır.","Parlayan, sıcak ve dikkat çeken bir duruşun var; girdiğin ortam seni hatırlar.","Özenli, zarif ve yardımsever görünürsün; detayları kimse senin kadar görmez.","Zarif, uyumlu ve çekici bir enerjin var; insanlar seninle kolay anlaşır.","Yoğun, gizemli ve derin bir bakışın var; insanlar seni çözmek ister.","Özgür ruhlu, iyimser ve maceracı görünürsün; enerjin bulaşıcıdır.","Ciddi, olgun ve kararlı bir duruşun var; insanlar sana güvenip yaslanır.","Farklı, bağımsız ve yenilikçi görünürsün; kalabalığa uymaman dikkat çeker.","Hassas, sezgisel ve rüya gibi bir enerjin var; insanların ruhuna dokunursun."];
+const AY = ["Duygularını hızlı yaşar, hızlı unutursun.","Duygusal güvenliğin huzur ve istikrardan geçer.","Duygularını konuşarak çözersin.","Çok derin hisseder, sevdiklerini korursun.","Sevgiyi görülmek ve takdir edilmek olarak yaşarsın.","Duygularını düzen kurarak sakinleştirirsin.","Uyum ve ilişki senin için duygusal bir ihtiyaçtır.","Duyguların yoğun ve dönüştürücüdür; yüzeyde kalamazsın.","Özgürlük duygusal nefesindir.","Duygularını kontrol altında tutar, güçlü görünürsün.","Duygularına mesafeyle bakar, özgür kalmak istersin.","Başkalarının duygularını sünger gibi çekersin."];
+const GECMIS = [
+ {rol:["Savaşçı","Asker","Kâşif","Kılıç ustası"],t:"Geçmiş hayatlarında hep tek başına savaştın; kimseye muhtaç olmamayı ve hızlı karar vermeyi orada öğrendin. Bu yüzden bugün bile yardım istemek sana zor gelir."},
+ {rol:["Çiftçi","Bağcı","Zanaatkâr","Tüccar"],t:"Toprakla, emekle ve birikimle geçen hayatlardan geliyorsun. Sahip olduklarını korumak senin için hayatta kalmaktı; bu yüzden değişim seni ürkütebilir."},
+ {rol:["Katip","Haberci","Seyyar tüccar","Çevirmen"],t:"Bilgi taşıdın, mektup yazdın, şehir şehir haber götürdün. Zihnin hep hızlıydı; ama bir yere kök salmadan sürekli bir sonraki bilgiye koştun."},
+ {rol:["Ebe","Aile reisi","Aşçı","Dadı"],t:"Ev, aile ve başkalarını korumak senin göreviydi; herkesin sığınağı sendin. Bugün de başkalarının yükünü kendi omzunda taşıma eğilimin buradan gelir."},
+ {rol:["Kraliçe / Kral","Oyuncu","Dansöz","Saray soylusu"],t:"Sahnelerde, saraylarda, alkışlar arasında yaşadın. Görülmek ve sevilmek senin için nefes gibiydi; bu yüzden ilgi azaldığında içinde bir boşluk hissedebilirsin."},
+ {rol:["Şifacı","Hemşire","Şifalı bitkici","Hizmetkâr"],t:"Başkalarına hizmet ederek, iyileştirerek, kusursuz olmaya çalışarak yaşadın. Kendine hep en son sıra geldi; bugün de dinlenmeyi suçluluk gibi hissedebilirsin."},
+ {rol:["Saray danışmanı","Diplomat","Ressam","Yoldaş / eş"],t:"Uyumu sağlayan, güzelliği yaratan ve başkalarının yanında duran kişiydin. Herkesi memnun etmek için kendi isteklerini çoğu zaman sessize aldın."},
+ {rol:["Simyacı","Şaman","Cerrah","Gizli bekçi"],t:"Sırların, krizlerin ve büyük dönüşümlerin içinden geçtin; ölümle yaşam arasındaki ince çizgiyi tanıyorsun. Güvenmek bu yüzden sana kolay gelmez."},
+ {rol:["Rahip","Filozof","Hacı","Gezgin öğretmen"],t:"İnancın, öğretinin ve yolun peşinde dolaştın; cevapları hep uzaklarda, kutsal metinlerde aradın. Kendi doğrunun tek doğru olduğuna inanmak eski bir alışkanlığın."},
+ {rol:["Hükümdar","General","Vezir","Başrahibe"],t:"Sorumluluk, statü ve görev yükünü taşıdın; güçlü görünmek zorundaydın. Duygularını göstermek bu yüzden sana hâlâ zayıflık gibi gelebilir."},
+ {rol:["Mucit","Devrimci","Astrolog","Bilim insanı"],t:"Fikirler, topluluklar ve gelecek için yaşadın; zamanının ötesindeydin. Ama duygularına hep biraz mesafeli kaldın; yakınlık seni hâlâ tedirgin edebilir."},
+ {rol:["Rahibe","Keşiş","Mistik","Tapınak müzisyeni"],t:"İnziva, dua ve fedakârlıkla geçen hayatlardan geliyorsun; başkalarının acısını kendi acın gibi taşıdın. Sınır koymak bu hayatta öğrenmen gereken en büyük şey olabilir."}];
+const SIMDI = [
+ {rol:["Arabulucu","Danışman","Tasarımcı","Ortaklık kuran"],t:"Bu hayatta ruhun tek başına savaşmayı bırakıp birlikte olmayı öğrenmek istiyor. Yanında biri olduğunda daha güçlü olduğunu keşfettikçe kapılar açılır."},
+ {rol:["Terapist","Araştırmacı","Kriz yöneticisi","Dönüştürücü"],t:"Bu hayatta güvenli limandan çıkıp derine dalman isteniyor: paylaşmak, bırakmak, dönüşmek. Kontrolü bıraktığında asıl gücünü bulacaksın."},
+ {rol:["Öğretmen","Yazar","Yolcu","Rehber"],t:"Bu hayatta bilgiyi bilgeliğe çevirmen isteniyor. Tek bir şehre, tek bir fikre sığmayacaksın; inandığın yolu cesaretle yürümek senin sınavın."},
+ {rol:["Lider","Yönetici","Kendi işinin sahibi","Mimar"],t:"Bu hayatta başkalarını korumaktan çok kendi hayatının otoritesi olman isteniyor. Hedef koyup sorumluluğu üstlendiğinde ruhun rahatlar."},
+ {rol:["Topluluk lideri","Mucit","İçerik üreticisi","Aktivist"],t:"Bu hayatta alkıştan çok anlam peşindesin. Işığını kişisel sahne yerine topluluk için kullandığında gerçek tatmini bulacaksın."},
+ {rol:["Sanatçı","Ruhsal rehber","Müzisyen","Şifacı"],t:"Bu hayatta kusursuzluğu bırakıp akışa güvenmen isteniyor. Sezgin, planlarından daha bilge; teslim oldukça hayat sana yol açar."},
+ {rol:["Girişimci","Öncü","Sporcu","Kendi yolunun lideri"],t:"Bu hayatta başkalarının onayını beklemeden “ben” diyebilmen isteniyor. Kendi kararını cesaretle verdiğinde kaderin hızlanır."},
+ {rol:["Üretici","Zanaatkâr","Bahçıvan","Huzur getiren"],t:"Bu hayatta krizlerden değil sakinlikten beslenmeyi öğreniyorsun. Kendi bahçeni, kendi değerini taş taş kurduğunda ruhun dinlenir."},
+ {rol:["İletişimci","Gazeteci","Yazar","Eğitmen"],t:"Bu hayatta tek doğruyu bırakıp merak etmen isteniyor: sormak, dinlemek, farklı fikirlere yer açmak. Kelimeler senin yeni yolun."},
+ {rol:["Şifacı","Ev kuran","Anne / baba figürü","Bakım veren"],t:"Bu hayatta zırhını indirip duygularını göstermen isteniyor. Kök saldığın, kırılgan olabildiğin yer seni gerçekten güçlendirecek."},
+ {rol:["Sanatçı","Sahne insanı","Hikâye anlatıcısı","Yaratıcı lider"],t:"Bu hayatta kalabalığın içinden çıkıp kendi kalbini ortaya koyman isteniyor. Sevmekten ve görünmekten korkmadığında parlayacaksın."},
+ {rol:["Uzman","Sağlık profesyoneli","Düzen kuran","Usta"],t:"Bu hayatta hayalden gerçeğe inmen isteniyor: rutin kurmak, bedenine iyi bakmak, somut işler çıkarmak. Ayakların yere bastıkça ruhun özgürleşir."}];
 const ALAN = ["kimliğin ve bedenin","paran ve öz değerin","iletişimin ve yakın çevren","evin ve ailen","aşk hayatın ve yaratıcılığın","işin ve günlük düzenin","ilişkilerin ve evliliğin","derin bağların ve ortak paran","yolculukların ve inancın","kariyerin ve hedeflerin","arkadaşların ve hayallerin","iç dünyan ve kapanışların"];
-const SORU = {alan:["Aşk ve ilişkiler","İş ve para","Aile","Kendimle ilgili"],hikaye:["Evet, var","Belki","Hayır"],ihtiyac:["Netlik","Cesaret","Huzur"]};
+const SORU = {alan:["Aşk ve ilişkiler","İş ve para","Aile","Kendimle ilgili"],dejavu:["Evet, sık sık","Bazen","Hiç olmadı"],ihtiyac:["Netlik","Cesaret","Huzur"]};
 const RITUEL = {Netlik:"Yeni ay akşamı bir kâğıda tek bir soru yaz; cevabı düşünmeden altına ilk gelen kelimeyi not et ve kâğıdı bir ay sakla.",Cesaret:"Bu hafta her sabah aynaya bakıp “Benim sıram geldi” de ve gün içinde ertelediğin tek bir şeyi yap.",Huzur:"Dolunay gecesi bir bardak suyu ay ışığına bırak; sabah kimseyle konuşmadan iç ve bırakmak istediğin şeyi içinden söyle."};
+
+/* ---------- haritadaki belirgin işaretler: zor açılar ve çarpıcı yerleşimler ---------- */
+const GEZ = { Gunes: "Güneş", Ay: "Ay", Merkur: "Merkür", Venus: "Venüs", Mars: "Mars", Jupiter: "Jüpiter", Saturn: "Satürn", Uranus: "Uranüs", Neptun: "Neptün", Pluton: "Plüton" };
+const ACI = { 0: "kavuşum yapıyor (birleşiyor)", 90: "kare açı yapıyor", 180: "karşıt açı yapıyor" };
+const OZEL = {
+ "Ay-Pluton": ["Duygusal kayıp ve yeniden doğuş", "Çocuklukta bir kayıp, ayrılık ya da annenle çok yoğun, kontrolcü bir bağ yaşamış olabilirsin. Duygularını derinde saklamayı erken öğrendin; ama aynı yerleşim insanların ruhunu okuyan, krizde en güçlü kalan kişiyi de anlatır."],
+ "Ay-Saturn": ["Erken büyüyen çocuk", "Duygularını göstermenin güvenli olmadığını küçükken öğrenmiş olabilirsin; çocukken büyümek zorunda kalan çocuk sendin. Bugün sevgiyi istemekte zorlanabilirsin; ama duygusal dayanıklılığın çok güçlüdür."],
+ "Ay-Uranus": ["Ani kopuşlar", "Hayatında evler, insanlar ya da düzenler aniden değişmiş olabilir; bu yüzden bağlanmakla kaçmak arasında gidip gelirsin. Özgür kaldığında duyguların en sağlıklı hâline kavuşur."],
+ "Ay-Neptun": ["Sınırsız hassasiyet", "Başkalarının acısını kendi acın gibi hissedersin; sınır koymadığında tükenebilirsin. Aynı yerleşim çok güçlü bir sezgi, hatta durugörü yeteneği verir."],
+ "Gunes-Saturn": ["Babayla sınav", "Babanla mesafeli ya da zor bir ilişki, çok erken yaşta yüklenen sorumluluklar olabilir. “Yeterince iyi değilim” sesi seni ileri iter; ama başarın geç gelse de kalıcı olur."],
+ "Gunes-Pluton": ["Küllerinden doğan", "Hayatında seni baştan yaratan büyük krizler var; her biri eski seni yakıp yenisini doğurdu. Güç senin için hem korku hem kader; dönüştürme yeteneğin olağanüstü."],
+ "Gunes-Uranus": ["Kalıp kırıcı", "Hayatın düz bir çizgide gitmez; ani dönüşler, sürprizler ve özgürlük kavgaları seni şekillendirir. Sıradan bir hayat sana göre değil."],
+ "Gunes-Neptun": ["Kaybolan kimlik", "Kim olduğunu bulmak sana zaman alabilir; başkalarının beklentileri içinde kaybolabilirsin. Ama sanata, ruhsallığa ve şifaya çok açık bir ruhun var."],
+ "Venus-Saturn": ["Geç açılan aşk", "Aşkta sevildiğinden emin olamamak, soğuk ya da geç gelen ilişkiler, yaşça farklı partnerler bu yerleşimin hikâyesidir. Ama kurduğun bağ, kurduğunda ömürlük olur."],
+ "Venus-Pluton": ["Tutkulu ve kaderli aşklar", "Aşkların yoğun, kıskançlık ve tutku dolu; bir ilişki seni tamamen değiştirmiş olabilir. Yarım sevmeyi bilmezsin; sevdiğin her şeyi dönüştürürsün."],
+ "Venus-Uranus": ["Ani başlayan ani biten aşklar", "Aşk hayatında beklenmedik başlangıçlar ve kopuşlar olur; özgürlüğünü kısıtlayan ilişkide nefes alamazsın."],
+ "Venus-Neptun": ["Ruh eşi arayışı", "İdealize ettiğin aşklarda hayal kırıklığı yaşamış olabilirsin; sevdiğini olduğundan farklı görmeye yatkınsın. Ama sevgin koşulsuz ve şifalıdır."],
+ "Mars-Saturn": ["Frenlenmiş güç", "Öfkeni bastırmayı, hep engellerle karşılaşmayı tanırsın; bu yüzden içte birikmiş bir gerginlik bedeninde (sırt, dişler, kaslar) kendini gösterebilir. Ama dayanıklılığın inanılmaz; başladığını mutlaka bitirirsin."],
+ "Mars-Pluton": ["Muazzam irade", "İçinde volkan gibi bir güç var; güç savaşları ve sert çatışmalar hayatında tekrar edebilir. Bu enerjiyi bir hedefe verdiğinde durdurulamazsın."],
+ "Mars-Uranus": ["Ani hareket", "Ani kararlar, kazalar ya da beklenmedik çıkışlar hayatında tekrar edebilir; aceleyle hareket ettiğinde dikkat et. Cesaretin ve hızın ise eşsiz."],
+ "Mars-Neptun": ["Yön arayan güç", "Enerjin bazen dağılır, ne istediğini bilmekte zorlanırsın; bedenin yorgunluğu kolay çeker. İlham verici bir amaç bulduğunda gücün katlanır."],
+ "Merkur-Saturn": ["Ağır düşünceler", "Kendine karşı çok eleştirel bir iç sesin var; söyleyemediğin sözler içinde birikebilir. Ama düşüncelerin derin, sözlerin ağırlıklıdır."],
+ "Merkur-Pluton": ["Sırları gören zihin", "Zihnin dedektif gibi çalışır; yüzeyin altını görürsün. Saplantılı düşüncelere dikkat; aynı güç seni iyi bir araştırmacı ya da terapist yapar."],
+ "Merkur-Neptun": ["Rüya gören zihin", "Dalgınlık, yanlış anlaşılmalar olabilir; ama hayal gücün ve sezgin çok güçlü, sözlerin şiir gibidir."],
+ "Merkur-Uranus": ["Şimşek zihin", "Fikirlerin aniden gelir, kimsenin görmediğini görürsün; sinirsel huzursuzluğa ve uykusuzluğa dikkat et."]};
+const YER = {
+ "Pluton-8": "Plüton 8. evinde: ruhsal astrolojide ölüm ve yeniden doğuşun evidir. Hayatında kayıplar seni derinden dönüştürür; miras, ortak para ve derin bağlar kaderinin parçasıdır. Ölümden korkmayan, krizde bile ayakta kalan bir ruhsun.",
+ "Pluton-1": "Plüton 1. evinde: yoğun, gizemli ve güçlü bir varlığın var; hayatında birden fazla kez kimliğini baştan yaratırsın.",
+ "Pluton-4": "Plüton 4. evinde: aile içinde gizli kalmış konular, güç dengeleri ya da erken bir kayıp seni şekillendirmiş olabilir. Kendi yuvanı kurarken bu zinciri kıran sen olabilirsin.",
+ "Pluton-7": "Plüton 7. evinde: ilişkilerin kaderli ve dönüştürücüdür; seni değiştiren insanlar hep partnerlerin olur.",
+ "Saturn-12": "Satürn 12. evinde: geçmiş hayatlardan taşınan bir yalnızlık ya da isimsiz korkular taşıyabilirsin. Yalnız kaldığın zamanlar, aslında ruhunun en çok güçlendiği zamanlardır.",
+ "Saturn-6": "Satürn 6. evinde: bedenin stresi depolar; uyku, ritim ve düzen senin için ilaç gibidir. İhmal ettiğinde yorgunluk kronik hâle gelebilir.",
+ "Saturn-7": "Satürn 7. evinde: geç evlilik, yaşça büyük partner ya da ilişkide ağır sorumluluk bu yerleşimin hikâyesidir. Kurduğun bağ ise sağlam ve kalıcıdır.",
+ "Saturn-4": "Satürn 4. evinde: çocukluk evinde duygusal sıcaklık eksik kalmış ya da ailede erken sorumluluk almış olabilirsin. Kendi yuvanı kurduğunda hayatın oturur.",
+ "Saturn-1": "Satürn 1. evinde: yaşından olgun görünürsün; erken yaşta ciddileşmek zorunda kaldın. Yıllar geçtikçe gençleşen nadir insanlardansın.",
+ "Mars-8": "Mars 8. evinde: tutkuların yoğun, krizlerde cesursun; ameliyat, kaza ya da sert dönüşümlerle sınanan bir enerjin olabilir. Dikkatli olduğunda bu güç seni korur.",
+ "Mars-6": "Mars 6. evinde: çok çalışırsın ve bedenini zorlarsın; enerjini düzenli egzersize vermezsen gerginlik bedeninde kendini gösterebilir.",
+ "Neptun-7": "Neptün 7. evinde: ilişkilerde kurtarıcı ya da kurtarılan rolüne girmeye yatkınsın; ruh eşini ararken gerçeği görmeye dikkat et.",
+ "Uranus-7": "Uranüs 7. evinde: alışılmadık ilişkiler, ani evlilik ya da ani ayrılıklar kaderinde olabilir; özgürlük ilişkide şarttır.",
+ "Neptun-12": "Neptün 12. evinde: çok güçlü bir sezgin ve ruhsal hassasiyetin var; rüyaların sana mesaj taşır."};
+
 const IL = {"Adana":[37,35.32],"Adıyaman":[37.76,38.28],"Afyonkarahisar":[38.76,30.54],"Ağrı":[39.72,43.05],"Aksaray":[38.37,34.03],"Amasya":[40.65,35.83],"Ankara":[39.93,32.86],"Antalya":[36.89,30.71],"Ardahan":[41.11,42.7],"Artvin":[41.18,41.82],"Aydın":[37.85,27.85],"Balıkesir":[39.65,27.89],"Bartın":[41.63,32.34],"Batman":[37.88,41.13],"Bayburt":[40.26,40.23],"Bilecik":[40.14,29.98],"Bingöl":[38.88,40.5],"Bitlis":[38.4,42.11],"Bolu":[40.74,31.61],"Burdur":[37.72,30.29],"Bursa":[40.19,29.06],"Çanakkale":[40.15,26.41],"Çankırı":[40.6,33.62],"Çorum":[40.55,34.95],"Denizli":[37.78,29.09],"Diyarbakır":[37.91,40.24],"Düzce":[40.84,31.16],"Edirne":[41.68,26.56],"Elazığ":[38.68,39.22],"Erzincan":[39.75,39.49],"Erzurum":[39.9,41.27],"Eskişehir":[39.78,30.52],"Gaziantep":[37.07,37.38],"Giresun":[40.91,38.39],"Gümüşhane":[40.46,39.48],"Hakkari":[37.57,43.74],"Hatay":[36.2,36.16],"Iğdır":[39.92,44.05],"Isparta":[37.76,30.55],"İstanbul":[41.01,28.98],"İzmir":[38.42,27.14],"Kahramanmaraş":[37.58,36.94],"Karabük":[41.2,32.62],"Karaman":[37.18,33.22],"Kars":[40.6,43.1],"Kastamonu":[41.39,33.78],"Kayseri":[38.73,35.49],"Kilis":[36.72,37.12],"Kırıkkale":[39.85,33.51],"Kırklareli":[41.73,27.22],"Kırşehir":[39.15,34.17],"Kocaeli":[40.77,29.92],"Konya":[37.87,32.48],"Kütahya":[39.42,29.98],"Malatya":[38.35,38.31],"Manisa":[38.61,27.43],"Mardin":[37.31,40.74],"Mersin":[36.81,34.64],"Muğla":[37.22,28.36],"Muş":[38.75,41.5],"Nevşehir":[38.62,34.71],"Niğde":[37.97,34.68],"Ordu":[40.98,37.88],"Osmaniye":[37.07,36.25],"Rize":[41.03,40.52],"Sakarya":[40.78,30.4],"Samsun":[41.29,36.33],"Şanlıurfa":[37.16,38.79],"Siirt":[37.93,41.94],"Sinop":[42.03,35.15],"Şırnak":[37.52,42.46],"Sivas":[39.75,37.02],"Tekirdağ":[40.98,27.51],"Tokat":[40.31,36.55],"Trabzon":[41,39.72],"Tunceli":[39.11,39.55],"Uşak":[38.68,29.41],"Van":[38.5,43.38],"Yalova":[40.66,29.28],"Yozgat":[39.82,34.81],"Zonguldak":[41.45,31.79],"Yurtdışı / Bilmiyorum":[41.01,28.98]};
-const d = {cevap:{}};
-const el = (i) => document.getElementById(i);
+const d = { cevap: {} }, el = (i) => document.getElementById(i);
+const LOGO = new Image(); LOGO.src = "logo.png";
 const sehirSec = el("sehir"); Object.keys(IL).forEach((k) => { const o = document.createElement("option"); o.textContent = k; if (k === "İstanbul") o.selected = true; sehirSec.appendChild(o); });
 Object.entries(SORU).forEach(([k, s], i) => { const kap = document.querySelector(`[data-s="${k}"]`); s.forEach((m) => { const b = document.createElement("button"); b.className = "secim"; b.textContent = m; b.onclick = () => { d.cevap[k] = m; b.classList.add("sec"); setTimeout(() => git(i + 2), 250); }; kap.appendChild(b); }); });
 el("saatYok").onchange = (e) => { el("saat").disabled = e.target.checked; };
 function git(n) { document.querySelectorAll(".adim").forEach((s) => s.classList.remove("acik")); el("a" + n).classList.add("acik"); el("bar").style.width = Math.min(100, n * 20) + "%"; window.scrollTo(0, 0); if (n === 4) analiz(); }
+function bildir(m) { const b = el("bildirim"); b.textContent = m; b.style.opacity = 1; setTimeout(() => (b.style.opacity = 0), 2200); }
 
 /* ---------- astronomi ---------- */
 const norm = (x) => ((x % 360) + 360) % 360, rad = Math.PI / 180;
 const sonPazar = (y, m) => { const t = new Date(Date.UTC(y, m + 1, 0)); return t.getUTCDate() - t.getUTCDay(); };
-function utcOfset(y, m, g) { // Türkiye: 2016 sonrası +3; öncesi yaz saati (Mart/Ekim son pazarı)
-  if (y > 2016 || (y === 2016 && (m > 8 || (m === 8 && g >= 7)))) return 3;
-  const ga = sonPazar(y, 2), ge = sonPazar(y, 9);
-  const yaz = (m > 2 && m < 9) || (m === 2 && g >= ga) || (m === 9 && g < ge); return yaz ? 3 : 2;
-}
+function utcOfset(y, m, g) { if (y > 2016 || (y === 2016 && (m > 8 || (m === 8 && g >= 7)))) return 3; const ga = sonPazar(y, 2), ge = sonPazar(y, 9); return ((m > 2 && m < 9) || (m === 2 && g >= ga) || (m === 9 && g < ge)) ? 3 : 2; }
 const isaret = (lon) => Math.floor(norm(lon) / 30);
 const gezLon = (body, date) => Astronomy.Ecliptic(Astronomy.GeoVector(body, Astronomy.MakeTime(date), true)).elon;
-const dugum = (date) => { const T = (Astronomy.MakeTime(date).tt) / 36525; return norm(125.04452 - 1934.136261 * T + 0.0020708 * T * T); };
-function yukselen(date, lat, lon) {
-  const t = Astronomy.MakeTime(date), T = t.tt / 36525, eps = (23.4392911 - 0.0130042 * T) * rad;
-  const ramc = norm(Astronomy.SiderealTime(t) * 15 + lon) * rad, f = lat * rad;
-  return norm(Math.atan2(Math.cos(ramc), -(Math.sin(ramc) * Math.cos(eps) + Math.tan(f) * Math.sin(eps))) / rad);
+const dugum = (date) => { const T = Astronomy.MakeTime(date).tt / 36525; return norm(125.04452 - 1934.136261 * T + 0.0020708 * T * T); };
+function yukselen(date, lat, lon) { const t = Astronomy.MakeTime(date), T = t.tt / 36525, eps = (23.4392911 - 0.0130042 * T) * rad, ramc = norm(Astronomy.SiderealTime(t) * 15 + lon) * rad, f = lat * rad; return norm(Math.atan2(Math.cos(ramc), -(Math.sin(ramc) * Math.cos(eps) + Math.tan(f) * Math.sin(eps))) / rad); }
+function isaretler(L, temel, saatVar) {
+  const kisi = ["Gunes", "Ay", "Merkur", "Venus", "Mars"], agir = ["Saturn", "Uranus", "Neptun", "Pluton"], agirlik = { Ay: 2.2, Gunes: 2, Venus: 1.6, Mars: 1.4, Merkur: 0.8 }, liste = [];
+  const ciftler = []; kisi.forEach((a) => agir.forEach((b) => ciftler.push([a, b]))); ciftler.push(["Mars", "Saturn"]);
+  for (const [a, b] of ciftler) { const fark = Math.abs(((L[a] - L[b] + 540) % 360) - 180), aci = 180 - fark;
+    for (const hedef of [0, 90, 180]) { const orb = Math.abs(aci - hedef), sinir = a === "Ay" ? 7 : 6; if (orb <= sinir && OZEL[`${a}-${b}`]) liste.push({ a, b, hedef, orb, skor: (sinir - orb) + (agirlik[a] || 1) * 2 + (hedef === 90 ? 1 : 0) }); } }
+  liste.sort((x, y) => y.skor - x.skor);
+  const yer = []; if (saatVar) for (const p of ["Pluton", "Saturn", "Mars", "Neptun", "Uranus"]) { const ev = ((isaret(L[p]) - temel + 12) % 12) + 1, k = `${p}-${ev}`; if (YER[k]) yer.push({ p, ev, t: YER[k] }); }
+  return { acilar: liste.slice(0, 3), yer };
 }
 function hesapla() {
   const [y, m, g] = el("tarih").value.split("-").map(Number), saatYok = el("saatYok").checked || !el("saat").value;
   const [hh, mm] = saatYok ? [12, 0] : el("saat").value.split(":").map(Number), [lat, lon] = IL[sehirSec.value];
-  const date = new Date(Date.UTC(y, m - 1, g, hh - utcOfset(y, m - 1, g), mm));
-  const gunes = isaret(Astronomy.SunPosition(Astronomy.MakeTime(date)).elon), ay = isaret(Astronomy.EclipticGeoMoon(Astronomy.MakeTime(date)).lon);
-  const yuk = saatYok ? null : isaret(yukselen(date, lat, lon)), kuzey = isaret(dugum(date)), guney = (kuzey + 6) % 12;
-  const temel = yuk ?? gunes, ev = (b) => (b - temel + 12) % 12;
-  const simdi = new Date(), yil = simdi.getFullYear();
-  const jup = isaret(gezLon(Astronomy.Body.Jupiter, simdi)), sat = isaret(gezLon(Astronomy.Body.Saturn, simdi)), kz = isaret(dugum(simdi));
-  let jYil = yil - 12; for (let k = 10; k <= 13; k++) if (isaret(gezLon(Astronomy.Body.Jupiter, new Date(Date.UTC(yil - k, 6, 1)))) === jup) { jYil = yil - k; break; }
-  let sYil = null; for (let k = 27; k <= 31; k++) if (isaret(gezLon(Astronomy.Body.Saturn, new Date(Date.UTC(yil - k, 6, 1)))) === sat) { sYil = yil - k; break; }
-  Object.assign(d, { dogum: el("tarih").value, saat: saatYok ? "" : el("saat").value, sehirAd: sehirSec.value, gunes, ay, yuk, kuzey, guney, yil, jup, sat, kz, jYil, sYil, dogYil: y,
-    jEv: ev(jup), sEv: ev(sat), kEv: ev(kz) });
+  const date = new Date(Date.UTC(y, m - 1, g, hh - utcOfset(y, m - 1, g), mm)), t = Astronomy.MakeTime(date), B = Astronomy.Body;
+  const L = { Gunes: Astronomy.SunPosition(t).elon, Ay: Astronomy.EclipticGeoMoon(t).lon, Merkur: gezLon(B.Mercury, date), Venus: gezLon(B.Venus, date), Mars: gezLon(B.Mars, date), Jupiter: gezLon(B.Jupiter, date), Saturn: gezLon(B.Saturn, date), Uranus: gezLon(B.Uranus, date), Neptun: gezLon(B.Neptune, date), Pluton: gezLon(B.Pluto, date) };
+  const gunes = isaret(L.Gunes), ay = isaret(L.Ay), yuk = saatYok ? null : isaret(yukselen(date, lat, lon));
+  const kuzey = isaret(dugum(date)), guney = (kuzey + 6) % 12, temel = yuk ?? gunes, ev = (b) => (b - temel + 12) % 12;
+  const simdi = new Date(), yil = simdi.getFullYear(), jup = isaret(gezLon(B.Jupiter, simdi)), sat = isaret(gezLon(B.Saturn, simdi)), kz = isaret(dugum(simdi));
+  let jYil = yil - 12; for (let k = 10; k <= 13; k++) if (isaret(gezLon(B.Jupiter, new Date(Date.UTC(yil - k, 6, 1)))) === jup) { jYil = yil - k; break; }
+  let sYil = null; for (let k = 27; k <= 31; k++) if (isaret(gezLon(B.Saturn, new Date(Date.UTC(yil - k, 6, 1)))) === sat) { sYil = yil - k; break; }
+  const dongu12 = []; for (let k = 0; k < 12; k++) { const yy = yil - 6 + k; dongu12.push([yy, ev(isaret(gezLon(B.Jupiter, new Date(Date.UTC(yy, 6, 1)))))]); }
+  Object.assign(d, { dogum: el("tarih").value, saat: saatYok ? "" : el("saat").value, sehirAd: sehirSec.value, gunes, ay, yuk, kuzey, guney, yil, jYil, sYil, dogYil: y, jEv: ev(jup), sEv: ev(sat), kEv: ev(kz), dongu12, isr: isaretler(L, temel, !saatYok) });
 }
 function ileri0() {
   if (!el("tarih").value) { el("hata0").textContent = "Lütfen doğum tarihini gir."; return; }
   if (!el("saatYok").checked && !el("saat").value) { el("hata0").textContent = "Saatini bilmiyorsan kutucuğu işaretle."; return; }
   el("hata0").textContent = ""; hesapla(); git(1);
 }
-function analiz() {
-  const m = ["Gökyüzü hesaplanıyor…", "Yükselenin bulunuyor…", "Ay düğümlerin okunuyor…", "Döngü yılların çıkarılıyor…", "Kartın hazırlanıyor ✦"]; let i = 0;
-  const z = setInterval(() => { el("analizYazi").textContent = m[++i] ?? m[m.length - 1]; if (i >= m.length) { clearInterval(z); kartCiz(); git(5); } }, 750);
-}
+function analiz() { const m = ["Gökyüzü hesaplanıyor…", "Yükselenin bulunuyor…", "Gezegen açıların okunuyor…", "Geçmiş hayatların çözümleniyor…", "Döngü yılların çıkarılıyor…", "Kartın hazırlanıyor ✦"]; let i = 0; const z = setInterval(() => { el("analizYazi").textContent = m[++i] ?? m[m.length - 1]; if (i >= m.length) { clearInterval(z); document.fonts.ready.then(() => { kartCiz(); detay(); git(5); }); } }, 700); }
 
 /* ---------- metinler ---------- */
-function metinler() {
-  const yukAd = d.yuk === null ? null : BURC[d.yuk];
-  const dongu = d.dogYil <= d.jYil
-    ? `${d.jYil}'te ${ALAN[d.jEv]} alanında başlayan hikâye, ${d.yil}'de yeni bir tura giriyor. O yıl ne ektiysen şimdi hasadı geliyor.`
-    : `Jüpiter şu an ${ALAN[d.jEv]} alanında; burada ${d.yil} yılı seni büyütecek kapılar açıyor.`;
-  const karma = d.sYil && d.dogYil <= d.sYil
-    ? `${d.sYil}'de ${ALAN[d.sEv]} alanında sınandığın konu, bu yıl karmik bir kapanışla yeniden önüne geliyor.`
-    : `Satürn şu an ${ALAN[d.sEv]} alanında: burada sabır ve olgunluk sınavı var; acele etme.`;
-  return { yukAd, dongu, karma, kader: `Kader ekseni şu an ${ALAN[d.kEv]} alanından geçiyor; bu yıl orada karmik kapılar açılıyor.` };
+const lok = (n) => { const b = n % 10, o = Math.floor(n / 10) % 10, y = Math.floor(n / 100) % 10; const ek = b ? ["", "de", "de", "te", "te", "te", "da", "de", "de", "da"][b] : o ? ["", "da", "de", "da", "ta", "de", "ta", "te", "de", "da"][o] : y ? "de" : "de"; return `${n}'${ek}`; };
+function metin() {
+  const yukAd = d.yuk === null ? null : BURC[d.yuk], yasJ = d.jYil - d.dogYil, yasS = d.sYil ? d.sYil - d.dogYil : -1;
+  const dongu = yasJ >= 16 ? `${lok(d.jYil)} ${ALAN[d.jEv]} alanında başlayan hikâye, ${lok(d.yil)} yeni bir tura giriyor. O yıl ne ektiysen şimdi hasadı geliyor.` : `Jüpiter şu an ${ALAN[d.jEv]} alanında; ${d.yil} burada seni büyütecek kapılar açıyor.`;
+  const karma = yasS >= 18 ? `${lok(d.sYil)} ${ALAN[d.sEv]} alanında yaşadığın sınav, bu yıl karmik bir kapanışla yeniden önüne geliyor; o zaman yarım kalanı şimdi tamamlıyorsun.` : `Satürn şu an ${ALAN[d.sEv]} alanından geçiyor; burada sabır ve olgunluk sınavı var, acele etme.`;
+  const a = d.isr.acilar[0], y0 = d.isr.yer[0];
+  const isaretMetin = a ? { bas: OZEL[`${a.a}-${a.b}`][0], t: `Haritanda ${GEZ[a.a]} ile ${GEZ[a.b]} ${ACI[a.hedef]}. ${OZEL[`${a.a}-${a.b}`][1]}` } : y0 ? { bas: `${GEZ[y0.p]} ${y0.ev}. evde`, t: y0.t } : { bas: "Uyumlu bir harita", t: "Haritanda sert açılar az; hayatın büyük kırılmalardan çok yavaş ve sağlam adımlarla şekilleniyor." };
+  return { yukAd, dongu, karma, isaretMetin, kader: `Kader ekseni şu an ${ALAN[d.kEv]} alanından geçiyor; bu yıl orada karmik kapılar açılıyor.` };
+}
+function detay() {
+  const M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], rol = (a) => `<div class="roller">${a.map((x) => `<span>${x}</span>`).join("")}</div>`;
+  const acilar = d.isr.acilar.map((a) => `<p><b>${GEZ[a.a]} ${ACI[a.hedef].split(" (")[0]} ${GEZ[a.b]} — ${OZEL[`${a.a}-${a.b}`][0]}.</b> ${OZEL[`${a.a}-${a.b}`][1]}</p>`).join("");
+  const yerler = d.isr.yer.slice(0, 2).map((y) => `<p>${y.t}</p>`).join("");
+  el("detay").innerHTML = `
+  <div class="bolum"><h4>SEN</h4><h3>${M.yukAd ? "Yükselen " + M.yukAd : "Güneş " + BURC[d.gunes]}</h3><p>${M.yukAd ? YUK[d.yuk] : "Doğum saatin olmadığı için yorum Güneş burcun üzerinden yapıldı."} Güneşin ${BURC[d.gunes]}, Ay'ın ${BURC[d.ay]}: ${AY[d.ay]}</p></div>
+  <div class="bolum"><h4>GEÇMİŞ HAYATLARIN · Güney Ay Düğümü ${BURC[d.guney]}</h4><h3>Bir zamanlar…</h3>${rol(G.rol)}<p>${G.t}</p>${d.cevap.dejavu === "Evet, sık sık" ? "<p>Bazı yerlere ve insanlara duyduğun açıklanamaz yakınlık, ruhsal astrolojide bu geçmiş hayat izlerine bağlanır.</p>" : ""}</div>
+  <div class="bolum"><h4>BU HAYATTA OLABİLECEKLERİN · Kuzey Ay Düğümü ${BURC[d.kuzey]}</h4><h3>Ruhunun sınavı</h3>${rol(S.rol)}<p>${S.t}</p></div>
+  <div class="bolum"><h4>HARİTANDAKİ BELİRGİN İŞARETLER</h4><h3>${M.isaretMetin.bas}</h3>${acilar || ""}${yerler || ""}${!acilar && !yerler ? `<p>${M.isaretMetin.t}</p>` : ""}</div>
+  <div class="bolum"><h4>DÖNGÜN · ${d.yil}</h4><h3>Karma ve zamanlama</h3><p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p></div>`;
 }
 
-/* ---------- paylaşılabilir kart (1080x1920) ---------- */
-function sar(g, s, x, y, w, lh) { const ws = s.split(" "); let l = "", n = 0; for (const k of ws) { const t = l ? l + " " + k : k; if (g.measureText(t).width > w && l) { g.fillText(l, x, y + n * lh); l = k; n++; } else l = t; } g.fillText(l, x, y + n * lh); return (n + 1) * lh; }
+/* ---------- paylaşılabilir kart (1080x1920, kâğıt + logo) ---------- */
+function sar(g, s, x, y, w, lh) { const ws = s.split(" "), sat = []; let l = ""; for (const k of ws) { const t = l ? l + " " + k : k; if (g.measureText(t).width > w && l) { sat.push(l); l = k; } else l = t; } sat.push(l); sat.forEach((q, i) => g.fillText(q, x, y + i * lh)); return sat.length * lh; }
+function kagit(g, W, H) {
+  const z = g.createRadialGradient(W / 2, 300, 100, W / 2, H / 2, 1300); z.addColorStop(0, "#f7efdf"); z.addColorStop(1, "#e4d3b4"); g.fillStyle = z; g.fillRect(0, 0, W, H);
+  for (let i = 0; i < 2600; i++) { const x = (i * 7919) % W, y = (i * 104729) % H, r = (i % 11) / 6 + 0.3; g.globalAlpha = 0.05 + (i % 5) * 0.02; g.fillStyle = i % 3 ? "#8a7155" : "#ffffff"; g.fillRect(x, y, r, r); }
+  for (let i = 0; i < 18; i++) { const x = (i * 331) % W, y = (i * 577) % H, r = 120 + (i % 4) * 60, gg = g.createRadialGradient(x, y, 0, x, y, r); gg.addColorStop(0, "rgba(160,125,80,0.06)"); gg.addColorStop(1, "rgba(160,125,80,0)"); g.globalAlpha = 1; g.fillStyle = gg; g.fillRect(x - r, y - r, 2 * r, 2 * r); }
+  g.globalAlpha = 1;
+}
+function yildiz(g, x, y, r) { g.beginPath(); for (let k = 0; k < 8; k++) { const a = (k / 8) * Math.PI * 2, rr = k % 2 ? r * 0.28 : r; g.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } g.closePath(); g.fill(); }
 function kartCiz() {
-  const c = el("kart"), g = c.getContext("2d"), M = metinler(), W = 1080, H = 1920;
-  const zg = g.createRadialGradient(540, 300, 100, 540, 900, 1300); zg.addColorStop(0, "#2a2160"); zg.addColorStop(1, "#0b0a1a"); g.fillStyle = zg; g.fillRect(0, 0, W, H);
-  for (let i = 0; i < 160; i++) { const x = (i * 397) % W, y = (i * 613) % H, r = (i % 7 === 0) ? 2.2 : 1.1; g.globalAlpha = 0.3 + (i % 5) * 0.12; g.fillStyle = i % 9 === 0 ? "#e8c46a" : "#ffffff"; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); }
-  g.globalAlpha = 1; g.strokeStyle = "#e8c46a"; g.lineWidth = 3; g.strokeRect(60, 60, W - 120, H - 120); g.lineWidth = 1; g.strokeRect(78, 78, W - 156, H - 156);
-  // çark
-  g.save(); g.translate(540, 470); g.strokeStyle = "#e8c46a"; g.globalAlpha = 0.85; g.lineWidth = 2; g.beginPath(); g.arc(0, 0, 190, 0, 7); g.stroke(); g.beginPath(); g.arc(0, 0, 140, 0, 7); g.stroke();
-  for (let k = 0; k < 12; k++) { const a = (k / 12) * Math.PI * 2 - Math.PI / 2; g.beginPath(); g.moveTo(Math.cos(a) * 140, Math.sin(a) * 140); g.lineTo(Math.cos(a) * 190, Math.sin(a) * 190); g.stroke();
-    const b = a + Math.PI / 12, vurgu = k === (d.yuk ?? d.gunes); g.fillStyle = vurgu ? "#e07aa8" : "#f6ecd0"; g.font = (vurgu ? "bold 40px" : "32px") + " 'DejaVu Sans', serif"; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(SEMBOL[k] + "︎", Math.cos(b) * 165, Math.sin(b) * 165); }
-  g.fillStyle = "#e8c46a"; g.font = "bold 96px 'DejaVu Sans', serif"; g.fillText(SEMBOL[d.yuk ?? d.gunes] + "︎", 0, 4); g.restore();
-  g.textAlign = "center"; g.textBaseline = "alphabetic"; g.fillStyle = "#e8c46a"; g.font = "600 30px Poppins"; g.fillText("✦  DOĞUM HARİTAN  ✦", 540, 200);
-  g.fillStyle = "#f6ecd0"; g.font = "italic 500 64px 'Cormorant Garamond'"; g.fillText(M.yukAd ? `Yükselen ${M.yukAd}` : `Güneş ${BURC[d.gunes]}`, 540, 760);
-  g.fillStyle = "#a49cc0"; g.font = "28px Poppins"; g.fillText(`Güneş ${BURC[d.gunes]} · Ay ${BURC[d.ay]}${M.yukAd ? "" : " · (saat yok)"}`, 540, 812);
-  let y = 900; const blok = (bas, ad, yz) => { g.textAlign = "left"; g.fillStyle = "#e8c46a"; g.font = "600 28px Poppins"; g.fillText(bas, 130, y); y += 54;
-    if (ad) { g.fillStyle = "#f6ecd0"; g.font = "700 50px 'Cormorant Garamond'"; g.fillText(ad, 130, y); y += 50; }
-    g.fillStyle = "#efe9f6"; g.font = "31px Poppins"; y += sar(g, yz, 130, y, 820, 44) + 40; };
-  blok("GEÇMİŞ YAŞAMIN", GUNEY[d.guney][0], GUNEY[d.guney][1]);
-  blok("BU HAYATTAKİ SINAVIN", null, KUZEY[d.kuzey]);
-  blok(`DÖNGÜN · ${d.yil}`, null, M.dongu);
-  blok("KARMAN", null, M.karma);
-  g.textAlign = "center"; g.fillStyle = "#e07aa8"; g.font = "600 34px Poppins"; g.fillText("@sobeastro", 540, H - 150); g.fillStyle = "#a49cc0"; g.font = "26px Poppins"; g.fillText("Sen de haritanı ücretsiz hesapla", 540, H - 105);
+  const c = el("kart"), g = c.getContext("2d"), W = 1080, H = 1920, M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], INK = "#2a241f", ALT = "#9a6d22", SOL = "#6f6151";
+  kagit(g, W, H);
+  g.strokeStyle = INK; g.lineWidth = 2; g.strokeRect(54, 54, W - 108, H - 108); g.lineWidth = 1; g.strokeRect(68, 68, W - 136, H - 136);
+  g.fillStyle = INK; [[110, 110], [W - 110, 110], [110, H - 110], [W - 110, H - 110]].forEach(([x, y]) => yildiz(g, x, y, 14));
+  if (LOGO.complete && LOGO.naturalWidth) g.drawImage(LOGO, W / 2 - 115, 100, 230, 230);
+  g.textAlign = "center"; g.fillStyle = SOL; g.font = "400 25px Poppins"; g.fillText("✦  D O Ğ U M   H A R İ T A N  ✦", W / 2, 380);
+  g.fillStyle = INK; g.font = "italic 600 82px 'Cormorant Garamond'"; g.fillText(M.yukAd ? `Yükselen ${M.yukAd}` : `Güneş ${BURC[d.gunes]}`, W / 2, 468);
+  g.fillStyle = SOL; g.font = "400 29px Poppins"; g.fillText(`${SEMBOL[d.gunes]}︎ Güneş ${BURC[d.gunes]}   ·   ${SEMBOL[d.ay]}︎ Ay ${BURC[d.ay]}`, W / 2, 522);
+  const cizgi = (y) => { g.strokeStyle = "#2a241f55"; g.lineWidth = 1; g.beginPath(); g.moveTo(170, y); g.lineTo(W / 2 - 24, y); g.moveTo(W / 2 + 24, y); g.lineTo(W - 170, y); g.stroke(); g.fillStyle = INK; yildiz(g, W / 2, y, 9); };
+  let y = 572; cizgi(y); y += 66;
+  const bolum = (bas, buyuk, yazi) => {
+    g.textAlign = "center"; g.fillStyle = ALT; g.font = "600 24px Poppins"; g.fillText(bas, W / 2, y); y += 54;
+    if (buyuk) { g.fillStyle = INK; g.font = "600 44px 'Cormorant Garamond'"; y += sar(g, buyuk, W / 2, y, 860, 50) + 4; }
+    g.fillStyle = "#3d342b"; g.font = "300 27px Poppins"; y += sar(g, yazi, W / 2, y, 850, 39) + 22; cizgi(y); y += 64;
+  };
+  bolum("GEÇMİŞ HAYATLARINDA", G.rol.join(" · "), G.t);
+  bolum("BU HAYATTA OLABİLECEKLERİN", S.rol.join(" · "), S.t);
+  bolum("HARİTANDAKİ İŞARET", M.isaretMetin.bas, M.isaretMetin.t);
+  g.fillStyle = INK; g.font = "italic 600 40px 'Cormorant Garamond'"; g.fillText("Sen de haritanı ücretsiz çıkar", W / 2, H - 165);
+  g.fillStyle = ALT; g.font = "600 30px Poppins"; g.fillText("harita.joinsobe.com  ·  @sobeastro", W / 2, H - 118);
 }
+const blobAl = () => new Promise((r) => el("kart").toBlob(r, "image/png"));
+const paylasMetni = () => `Geçmiş hayatımda ${GECMIS[d.guney].rol[0].toLowerCase()} imişim 😮 Sen de ücretsiz doğum haritanı çıkar ✨ ${SITE}`;
 async function paylas() {
-  const c = el("kart"); c.toBlob(async (b) => { const f = new File([b], "dogum-haritam.png", { type: "image/png" });
-    if (navigator.canShare && navigator.canShare({ files: [f] })) { try { await navigator.share({ files: [f], title: "Doğum haritam" }); return; } catch (e) {} }
-    const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "dogum-haritam.png"; a.click(); }, "image/png");
+  const b = await blobAl(), f = new File([b], "dogum-haritam.png", { type: "image/png" });
+  if (navigator.canShare && navigator.canShare({ files: [f] })) { try { await navigator.share({ files: [f], text: paylasMetni() }); return; } catch (e) { if (e.name === "AbortError") return; } }
+  indir(); bildir("Kart indirildi; Instagram hikâyende paylaşabilirsin ✨");
 }
+async function indir() { const b = await blobAl(), a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = "dogum-haritam.png"; a.click(); }
+function whatsapp() { window.open("https://wa.me/?text=" + encodeURIComponent(paylasMetni()), "_blank"); }
+async function kopyala() { try { await navigator.clipboard.writeText(paylasMetni()); bildir("Kopyalandı! Arkadaşına yapıştırıp gönder 💌"); } catch (e) { prompt("Kopyala:", paylasMetni()); } }
 
 /* ---------- tam rapor e-postası ---------- */
 function raporHtml() {
-  const M = metinler(), b = (s) => `<h3 style="font-family:Georgia,serif;color:#b8862b;margin:22px 0 6px">${s}</h3>`;
-  const ihtiyac = d.cevap.ihtiyac || "Huzur";
-  return `<div style="font-family:Arial,sans-serif;color:#2b2540;max-width:560px;margin:auto;line-height:1.55">
-  <h2 style="font-family:Georgia,serif;color:#2b2160">✦ Doğum Haritan ✦</h2>
-  <p>${M.yukAd ? `Yükselenin <b>${M.yukAd}</b>: dünyaya ${YUK[d.yuk]} olarak görünürsün.` : `Doğum saatin olmadığı için yorum Güneş burcun <b>${BURC[d.gunes]}</b> üzerinden yapıldı.`} Güneşin <b>${BURC[d.gunes]}</b>, Ay'ın <b>${BURC[d.ay]}</b>.</p>
-  ${b("Geçmiş yaşamın: " + GUNEY[d.guney][0])}<p>Ruhsal astrolojide Güney Ay Düğümü, geçmişten getirdiğin yetenekleri ve alışkanlıkları anlatır. Seninki <b>${BURC[d.guney]}</b>'te: ${GUNEY[d.guney][1]} Bu yüzden bu konular sana çok tanıdık gelir; ama ruhun bu hayatta aynı yerde kalmak için gelmedi.</p>
-  ${b("Bu hayattaki sınavın")}<p>Kuzey Ay Düğümün <b>${BURC[d.kuzey]}</b>'te. Ruhunun bu hayattaki ödevi: ${KUZEY[d.kuzey]} Bu yön başta rahatsız edici gelebilir; zorlandığın yer, büyüdüğün yerdir.</p>
+  const M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], b = (s) => `<h3 style="font-family:Georgia,serif;color:#9a6d22;margin:22px 0 6px">${s}</h3>`, ihtiyac = d.cevap.ihtiyac || "Huzur";
+  const tablo = d.dongu12.map(([yy, e]) => `<tr><td style="padding:4px 10px;border-bottom:1px solid #eadfca"><b>${yy}</b></td><td style="padding:4px 10px;border-bottom:1px solid #eadfca">${ALAN[e]}</td></tr>`).join("");
+  const acilar = d.isr.acilar.map((a) => `<p><b>${GEZ[a.a]} – ${GEZ[a.b]} (${ACI[a.hedef].split(" (")[0]}): ${OZEL[`${a.a}-${a.b}`][0]}.</b> ${OZEL[`${a.a}-${a.b}`][1]}</p>`).join("") + d.isr.yer.map((y) => `<p>${y.t}</p>`).join("");
+  return `<div style="font-family:Arial,sans-serif;color:#2a241f;background:#f7efdf;padding:22px;max-width:580px;margin:auto;line-height:1.6">
+  <div style="text-align:center"><img src="${SITE}/logo.png" width="110" alt="SobeAstro"><h2 style="font-family:Georgia,serif;margin:8px 0">✦ Doğum Haritan ✦</h2></div>
+  <p>${M.yukAd ? `Yükselenin <b>${M.yukAd}</b>. ${YUK[d.yuk]}` : `Doğum saatin olmadığı için yorum Güneş burcun <b>${BURC[d.gunes]}</b> üzerinden yapıldı.`} Güneşin <b>${BURC[d.gunes]}</b>, Ay'ın <b>${BURC[d.ay]}</b>: ${AY[d.ay]}</p>
+  ${b("Geçmiş hayatların")}<p><b>${G.rol.join(" · ")}</b></p><p>Ruhsal astrolojide Güney Ay Düğümü, ruhun geçmişten getirdiği yetenekleri ve alışkanlıkları anlatır. Seninki <b>${BURC[d.guney]}</b>'te. ${G.t}</p>
+  ${b("Bu hayatta olabileceklerin ve sınavın")}<p><b>${S.rol.join(" · ")}</b></p><p>Kuzey Ay Düğümün <b>${BURC[d.kuzey]}</b>'te. ${S.t}</p>
+  ${b("Haritandaki belirgin işaretler")}${acilar || `<p>${M.isaretMetin.t}</p>`}
   ${b("Döngü yılların")}<p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p>
+  <p>Jüpiter'in 12 yıllık turu (her yıl hayatının hangi alanı büyüyor):</p><table style="border-collapse:collapse;font-size:14px">${tablo}</table>
   ${d.cevap.alan ? `<p>En çok <b>${d.cevap.alan.toLowerCase()}</b> alanında tekrar eden bir döngü hissettiğini söyledin. Bu yıl o alanda eski bir kalıbı fark edip kapatman için uygun bir dönem olarak yorumlanır.</p>` : ""}
   ${b("Sana özel ritüel: " + ihtiyac)}<p>${RITUEL[ihtiyac]}</p>
-  <p style="margin-top:28px;color:#7a7194;font-size:13px">Her dolunay ve yeni ayda kısa notlarımız gelecek. Instagram: @sobeastro<br>Bu yorum ruhsal astroloji geleneğine dayanır; eğlence ve iç gözlem amaçlıdır.</p></div>`;
+  <p style="margin-top:26px;color:#6f6151;font-size:13px">Her dolunay ve yeni ayda kısa notlarımız gelecek. Instagram: <b>@sobeastro</b> · ${SITE}<br>Bu yorum ruhsal astroloji geleneğine dayanır; eğlence ve iç gözlem amaçlıdır, sağlık ya da gelecek hakkında kesin bilgi vermez.</p></div>`;
 }
 async function gonder() {
   const e = el("eposta").value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) { el("hata5").textContent = "Geçerli bir e-posta yaz."; return; }
