@@ -43,6 +43,7 @@ button{width:100%;margin-top:20px;padding:16px;border:0;border-radius:14px;backg
 @keyframes don{to{transform:rotate(360deg)}}
 #analizYazi{color:var(--soluk);margin-top:22px;min-height:22px}
 canvas{width:100%;border-radius:16px;display:block;box-shadow:0 18px 50px #5a43282e}
+.tablo{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}.tablo td{padding:5px 8px;border-bottom:1px solid var(--cizgi)}
 .paylas{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .paylas button{margin:0;padding:13px;font-size:14px}
 .paylas .ikinci{background:#fffaf0;color:var(--murekkep);border:1px solid var(--cizgi)}
@@ -90,6 +91,7 @@ canvas{width:100%;border-radius:16px;display:block;box-shadow:0 18px 50px #5a432
       <button class="ikinci tam" onclick="kopyala()">Arkadaşına link gönder (kopyala)</button>
     </div>
     <div id="detay"></div>
+    <!-- E-POSTA FORMU (şimdilik kapalı; açmak için bu yorum işaretlerini kaldır)
     <div class="bolum">
       <h3>Tam raporun hazır</h3>
       <p>Haritandaki bütün güçlü açılar, 12 yıllık döngü haritan (hangi yıl hangi alan) ve sana özel ritüel. E-postana gönderelim.</p>
@@ -99,6 +101,7 @@ canvas{width:100%;border-radius:16px;display:block;box-shadow:0 18px 50px #5a432
       <button onclick="gonder()">Tam raporumu gönder</button>
       <p class="tamam" id="tamam" style="display:none">Raporun yolda 💌 Gelen kutunu (ve spam klasörünü) kontrol et.</p>
     </div>
+    -->
     <p class="not">Bu yorum ruhsal (karmik) astroloji geleneğine dayanır; eğlence ve iç gözlem amaçlıdır, sağlık ya da gelecek hakkında kesin bilgi vermez.</p>
   </section>
 </main>
@@ -270,7 +273,11 @@ function hesapla() {
   const simdi = new Date(), yil = simdi.getFullYear(), jup = isaret(gezLon(B.Jupiter, simdi)), sat = isaret(gezLon(B.Saturn, simdi)), kz = isaret(dugum(simdi));
   let jYil = yil - 12; for (let k = 10; k <= 13; k++) if (isaret(gezLon(B.Jupiter, new Date(Date.UTC(yil - k, 6, 1)))) === jup) { jYil = yil - k; break; }
   let sYil = null; for (let k = 27; k <= 31; k++) if (isaret(gezLon(B.Saturn, new Date(Date.UTC(yil - k, 6, 1)))) === sat) { sYil = yil - k; break; }
-  const dongu12 = []; for (let k = 0; k < 12; k++) { const yy = yil - 6 + k; dongu12.push([yy, ev(isaret(gezLon(B.Jupiter, new Date(Date.UTC(yy, 6, 1)))))]); }
+  const AYK = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"], ayl = [];
+  for (let m = 0; m < 156; m++) { const dt = new Date(Date.UTC(yil - 6, m, 15)); ayl.push([dt.getUTCFullYear(), dt.getUTCMonth(), isaret(gezLon(B.Jupiter, dt))]); }
+  let parca = []; for (const a of ayl) { const son = parca[parca.length - 1]; if (son && son.b === a[2]) son.n++; else parca.push({ b: a[2], y: a[0], m: a[1], n: 1 }); }
+  parca = parca.filter((q, i) => q.n >= 3 || i === 0); const gor = new Set(), birl = []; for (const q of parca) { if (gor.has(q.b)) continue; gor.add(q.b); birl.push(q); }
+  const dongu12 = birl.slice(1, 13).map((q, i, A) => [`${AYK[q.m]} ${q.y}` + (A[i + 1] ? ` – ${AYK[A[i + 1].m]} ${A[i + 1].y}` : ""), ev(q.b)]);
   const gLon = norm(dugum(date) + 180), dgz = Object.keys(DUGUM_GEZ).filter((k) => { const f = Math.abs(((L[k] - gLon + 540) % 360) - 180); return f <= 8; });
   Object.assign(d, { L, temel, saatVar: !saatYok, dgz, gEv: ev(guney), kEvN: ev(kuzey), dogum: el("tarih").value, saat: saatYok ? "" : el("saat").value, sehirAd: sehirSec.value, gunes, ay, yuk, kuzey, guney, yil, jYil, sYil, dogYil: y, jEv: ev(jup), sEv: ev(sat), kEv: ev(kz), dongu12, isr: isaretler(L, temel, !saatYok) });
 }
@@ -306,7 +313,9 @@ function detay() {
   <div class="bolum"><h4>BU YÜZDEN BUGÜN</h4><h3>Neden böylesin</h3><p>${M.bugun}</p></div>
   <div class="bolum"><h4>BU YAŞAMDA DENEYİMLEMEN GEREKEN · Kuzey Ay Düğümü ${BURC[d.kuzey]}</h4><h3>Ruhunun sınavı</h3>${rol(S.rol)}<p>${M.simdi}</p><p>${S.t}</p></div>
   <div class="bolum"><h4>HARİTANDAKİ BELİRGİN İŞARETLER</h4><h3>${M.isaretMetin.bas}</h3>${acilar || ""}${yerler || ""}${!acilar && !yerler ? `<p>${M.isaretMetin.t}</p>` : ""}</div>
-  <div class="bolum"><h4>DÖNGÜN · ${d.yil}</h4><h3>Karma ve zamanlama</h3><p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p></div>`;
+  <div class="bolum"><h4>DÖNGÜN · ${d.yil}</h4><h3>Karma ve zamanlama</h3><p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p></div>
+  <div class="bolum"><h4>12 YILLIK DÖNGÜN</h4><h3>Hangi yıl hangi alan büyüyor</h3><p>Jüpiter'in 12 yıllık turu:</p><table class="tablo">${d.dongu12.map(([yy, e]) => `<tr><td><b>${yy}</b></td><td>${ALAN[e]}</td></tr>`).join("")}</table>${d.cevap.alan ? `<p>En çok <b>${d.cevap.alan.toLowerCase()}</b> alanında tekrar eden bir döngü hissettiğini söyledin. Bu yıl o alanda eski bir kalıbı fark edip kapatman için uygun bir dönem olarak yorumlanır.</p>` : ""}</div>
+  <div class="bolum"><h4>SANA ÖZEL RİTÜEL</h4><h3>${d.cevap.ihtiyac || "Huzur"}</h3><p>${RITUEL[d.cevap.ihtiyac || "Huzur"]}</p></div>`;
 }
 
 /* ---------- paylaşılabilir kart (1080x1920, kâğıt + logo) ---------- */
