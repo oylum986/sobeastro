@@ -197,6 +197,60 @@ const DUGUM_GEZ = {
  Gunes: "Güneş Güney Düğümünün tam üzerinde: geçmiş yaşamında önemli ve tanınan biriydin; bu hayatta o tanıdık rolü bırakmak sana zor gelebilir."};
 const cumle = (s, i) => (s.match(/[^.!?]+[.!?]/g) || [s])[i]?.trim() || "";
 
+
+/* ---------- şu an gökyüzü: yeni ay / dolunay / tutulma / Merkür geri ---------- */
+const DOLUNAY_EV = [
+ "Kendinle ilgili bir gerçek gün yüzüne çıkıyor; yorgunluğun, bedenin ve nasıl göründüğün hakkında bir şey netleşiyor. Başkaları için değil, kendin için karar ver.",
+ "Para ve öz değer konusunda tablo netleşiyor; harcamaların, kazancın ya da “ben bunu hak ediyor muyum” sorusu öne çıkıyor. Değerini düşüren bir alışkanlığı bırakma zamanı.",
+ "Söylenmemiş sözler dökülüyor; yakın çevrenle bir konuşma bir şeyi açıklığa kavuşturuyor. Bir mesaj ya da haber beklediğinden önemli çıkabilir.",
+ "Ev ve aile duyguları kabarıyor; geçmişten bir mesele ya da ailenden biriyle ilgili bir duygu yüzeye çıkıyor. Evde bir şeyi tamamlamak ya da bırakmak sana iyi gelir.",
+ "Aşkta ve yaratıcılıkta bir doruk noktası: kalbinin gerçekten ne istediği netleşiyor. Bir ilişki ya da proje ya tamamlanıyor ya da ilan ediliyor.",
+ "Günlük düzenin ve sağlığın dikkat istiyor; işte bir yük ağırlaşabilir ya da bir iş tamamlanabilir. Bedeninin sinyallerini dinle.",
+ "İlişkilerinde bir dönüm noktası: karşındaki kişi ne istediğini açıkça gösterebilir. Bir ortaklık tamamlanıyor, yenileniyor ya da netleşiyor.",
+ "Derin duygular, ortak para ve güven meseleleri yüzeye çıkıyor. Bir sırrı, bir borcu ya da seni yoran bir bağı bırakma zamanı.",
+ "Bir inanç, eğitim ya da yolculuk planı sonuçlanıyor; ufkunu genişleten bir haber gelebilir. Doğru bildiğin bir şeyi sorgulamaya hazır ol.",
+ "Kariyerinde bir hasat anı: emeğin fark edilebilir ya da iş ile ev arasındaki denge zorlanabilir. Hedefinin hâlâ sana ait olup olmadığını sor.",
+ "Arkadaşlıklar netleşiyor; kimin gerçekten yanında olduğunu görebilirsin. Bir hayalin şekil değiştiriyor, bırakman gereken bir beklenti var.",
+ "İç dünyan çalkalanıyor; rüyaların yoğunlaşabilir, eski bir hüzün çıkıp gidiyor. Geri çekil, dinlen; bu dolunay sessizlikte şifa veriyor."];
+const YENIAY_EV = [
+ "Kendin için yeni bir sayfa açılıyor; görünüşünde, bedeninde ya da hayata bakışında bir başlangıç yapmak için güçlü bir zaman.",
+ "Para ve öz değer için tohum ekme zamanı: yeni bir gelir fikri, bir birikim kararı ya da kendine daha değerli davranma niyeti.",
+ "Yeni bir konuşma, bir yazı, bir kurs ya da yakın çevrenle yeni bir bağ başlıyor. Niyetini yaz; kelimelerin bu ay güçlü.",
+ "Evde ve ailede yeni bir başlangıç: düzen değiştirmek ya da aileyle ilişkini yeniden kurmak için uygun bir dönem.",
+ "Kalbin için yeni bir sayfa: yeni bir aşk, yeni bir hobi ya da yaratıcı bir proje için niyet et.",
+ "Yeni bir rutin başlat: uyku, beslenme, hareket ya da iş düzeninde küçük bir değişiklik bu ay büyük fark yaratır.",
+ "İlişkilerde yeni bir dönem: biriyle tanışma, bir ortaklık kurma ya da mevcut ilişkini yeniden tanımlama zamanı.",
+ "Derin bir dönüşüm başlıyor: ortak para, güven ve yakınlık konusunda yeni bir karar alabilirsin.",
+ "Yeni bir öğrenme ya da yolculuk niyeti: bir eğitim, bir seyahat planı ya da yeni bir inanç arayışı başlıyor.",
+ "Kariyerinde yeni bir hedef koy: bir başvuru, yeni bir rol ya da görünür olmanı sağlayacak bir adım için doğru zaman.",
+ "Yeni dostluklar ve hayaller: bir topluluğa katılmak ya da uzun vadeli bir hayali yazmak için güçlü bir dönem.",
+ "Sessiz bir başlangıç: içe dönmek, dinlenmek ya da geçmişi kapatmak için niyet et. Görünmeyen iş bu ay en çok karşılığını verir."];
+const trTarih = (t) => t.toLocaleDateString("tr-TR", { day: "numeric", month: "long", timeZone: "Europe/Istanbul" });
+const ayrim = (a, b) => Math.abs(((a - b + 540) % 360) - 180);
+function gokyuzu() {
+  const now = new Date(), gun = 864e5, bas = new Date(+now - 32 * gun), olay = [];
+  for (const hedef of [0, 180]) { let t = bas; for (let i = 0; i < 4; i++) { const r = Astronomy.SearchMoonPhase(hedef, t, 40); if (!r) break; olay.push({ tur: hedef ? "dolunay" : "yeni ay", t: r.date }); t = new Date(+r.date + gun); } }
+  olay.sort((a, b) => a.t - b.t);
+  const son = olay.filter((o) => o.t <= now).pop(), sonraki = olay.find((o) => o.t > now);
+  let lt = null, gt = null; try { lt = Astronomy.SearchLunarEclipse(bas).peak.date; gt = Astronomy.SearchGlobalSolarEclipse(bas).peak.date; } catch (e) {}
+  const ad = (o) => { const tut = o.tur === "dolunay" ? lt && Math.abs(lt - o.t) < 2 * gun : gt && Math.abs(gt - o.t) < 2 * gun; return tut ? (o.tur === "dolunay" ? "ay tutulması" : "güneş tutulması") : o.tur; };
+  const evN = (lon) => (isaret(lon) - d.temel + 12) % 12, temas = (lon, tur) => {
+    const t = []; for (const [k, nm, an] of [["Gunes", "Güneşinin", "kimliğin ve yönün için kişisel bir dönüm noktası"], ["Ay", "Ay'ının", "duyguların bu günlerde her zamankinden yoğun"], ["Venus", "Venüs'ünün", "aşk ve değer konuları doğrudan seni ilgilendiriyor"], ["Saturn", "Satürn'ünün", "eski bir sorumluluk ya da sınır yeniden sınanıyor"]]) {
+      const f = ayrim(lon, d.L[k]); if (f <= 6) t.push(`Bu ${tur} doğum haritandaki ${nm} tam üzerinde; ${an}.`); else if (Math.abs(f - 180) <= 6) t.push(`Bu ${tur} doğum haritandaki ${nm} tam karşısında; ${an}.`); }
+    return t.slice(0, 2).join(" "); };
+  const parca = [], yaz = (o, simdi) => {
+    const lon = gezLon(o.tur === "dolunay" ? Astronomy.Body.Moon : Astronomy.Body.Sun, o.t), n = evN(lon), tur = ad(o), metin = (o.tur === "dolunay" ? DOLUNAY_EV : YENIAY_EV)[n];
+    return { bas: `${BURC_DE[isaret(lon)]} ${tur}`, t: `${simdi ? trTarih(o.t) + " tarihindeki" : trTarih(o.t) + " tarihinde gelecek"} ${BURC_DE[isaret(lon)]} ${tur} senin haritanda ${n + 1}. evine, ${ALAN[n]} alanına düşüyor. ${metin} ${temas(lon, tur)}`.trim() };
+  };
+  const a = yaz(son, true); a.t += sonraki ? ` Bu etki ${trTarih(sonraki.t)} tarihindeki ${ad(sonraki).replace(/ı$/, "ın")}a kadar sürüyor.` : ""; if (/tutulması/.test(ad(son))) a.t += " Tutulmaların etkisi aylarca hissedilir."; parca.push(a);
+  if (sonraki && sonraki.t - now < 5 * gun) parca.push(yaz(sonraki, false));
+  const hiz = (t) => ((gezLon(Astronomy.Body.Mercury, new Date(+t + gun)) - gezLon(Astronomy.Body.Mercury, t) + 540) % 360) - 180;
+  if (hiz(now) < 0) { let e = now; for (let i = 0; i < 30 && hiz(e) < 0; i++) e = new Date(+e + gun); const n = evN(gezLon(Astronomy.Body.Mercury, now));
+    parca.push({ bas: "Merkür geri", t: `Merkür şu an ${BURC_DE[isaret(gezLon(Astronomy.Body.Mercury, now))]} geri hareket ediyor ve ${n + 1}. evinden geçiyor. ${trTarih(e)} tarihine kadar ${ALAN[n]} alanında eski konular, yarım kalan konuşmalar ve geçmişten insanlar geri dönebilir. Önemli imzaları ertele, eskiyi tamamla.` }); }
+  else { let s2 = now; for (let i = 0; i < 10; i++) { s2 = new Date(+s2 + gun); if (hiz(s2) < 0) { const n = evN(gezLon(Astronomy.Body.Mercury, s2)); parca.push({ bas: "Merkür geri dönüyor", t: `${trTarih(s2)} tarihinde Merkür geri harekete başlıyor ve ${n + 1}. evinden geçecek: ${ALAN[n]} alanında eski konular yeniden açılabilir. Önemli kararlarını mümkünse bu tarihten önce netleştir.` }); break; } } }
+  return parca;
+}
+
 /* ---------- haritadaki belirgin işaretler: zor açılar ve çarpıcı yerleşimler ---------- */
 const GEZ = { Gunes: "Güneş", Ay: "Ay", Merkur: "Merkür", Venus: "Venüs", Mars: "Mars", Jupiter: "Jüpiter", Saturn: "Satürn", Uranus: "Uranüs", Neptun: "Neptün", Pluton: "Plüton" };
 const ACI = { 0: "kavuşum yapıyor (birleşiyor)", 90: "kare açı yapıyor", 180: "karşıt açı yapıyor" };
@@ -304,11 +358,12 @@ function metin() {
   return { gecmis, bugun, simdi, yukAd, dongu, karma, isaretMetin, kader: `Kader ekseni şu an ${ALAN[d.kEv]} alanından geçiyor; bu yıl orada karmik kapılar açılıyor.` };
 }
 function detay() {
-  const M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], rol = (a) => `<div class="roller">${a.map((x) => `<span>${x}</span>`).join("")}</div>`;
+  const G2 = gokyuzu(), M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], rol = (a) => `<div class="roller">${a.map((x) => `<span>${x}</span>`).join("")}</div>`;
   const acilar = d.isr.acilar.map((a) => `<p><b>${GEZ[a.a]} ${ACI[a.hedef].split(" (")[0]} ${GEZ[a.b]} — ${OZEL[`${a.a}-${a.b}`][0]}.</b> ${OZEL[`${a.a}-${a.b}`][1]}</p>`).join("");
   const yerler = d.isr.yer.slice(0, 2).map((y) => `<p>${y.t}</p>`).join("");
   el("detay").innerHTML = `
   <div class="bolum"><h4>SEN</h4><h3>${M.yukAd ? "Yükselen " + M.yukAd : "Güneş " + BURC[d.gunes]}</h3><p>${M.yukAd ? YUK[d.yuk] : "Doğum saatin olmadığı için yorum Güneş burcun üzerinden yapıldı."} Güneşin ${BURC[d.gunes]}, Ay'ın ${BURC[d.ay]}: ${AY[d.ay]}</p></div>
+  <div class="bolum"><h4>ŞU AN GÖKYÜZÜNDE · SENİ NASIL ETKİLİYOR</h4><h3>${G2[0].bas}</h3>${G2.map((x, i) => `<p>${i ? `<b>${x.bas}:</b> ` : ""}${x.t}</p>`).join("")}${d.saatVar ? "" : "<p><i>Doğum saatin olmadığı için evler Güneş burcuna göre hesaplandı.</i></p>"}</div>
   <div class="bolum"><h4>GEÇMİŞ YAŞAMIN · Güney Ay Düğümü ${BURC[d.guney]}</h4><h3>Bir zamanlar…</h3>${rol(G.rol)}<p>${M.gecmis}</p>${d.cevap.dejavu === "Evet, sık sık" ? "<p>Bazı yerlere ve insanlara duyduğun açıklanamaz yakınlık bu geçmiş yaşam izlerinden geliyor; ruhun onları tanıyor.</p>" : ""}</div>
   <div class="bolum"><h4>BU YÜZDEN BUGÜN</h4><h3>Neden böylesin</h3><p>${M.bugun}</p></div>
   <div class="bolum"><h4>BU YAŞAMDA DENEYİMLEMEN GEREKEN · Kuzey Ay Düğümü ${BURC[d.kuzey]}</h4><h3>Ruhunun sınavı</h3>${rol(S.rol)}<p>${M.simdi}</p><p>${S.t}</p></div>
