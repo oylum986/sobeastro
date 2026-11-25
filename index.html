@@ -303,6 +303,15 @@ function bildir(m) { const b = el("bildirim"); b.textContent = m; b.style.opacit
 /* ---------- astronomi ---------- */
 const norm = (x) => ((x % 360) + 360) % 360, rad = Math.PI / 180;
 const sonPazar = (y, m) => { const t = new Date(Date.UTC(y, m + 1, 0)); return t.getUTCDate() - t.getUTCDay(); };
+/* Türkiye'nin tarihsel saat dilimi (1978–85 arası +3 dahil): tarayıcının saat dilimi veritabanı */
+function yerelUTC(y, m, g, hh, mm) {
+  const hedef = Date.UTC(y, m - 1, g, hh, mm);
+  try {
+    const f = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Istanbul", hourCycle: "h23", year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" });
+    const yer = (t) => { const p = {}; for (const x of f.formatToParts(new Date(t))) p[x.type] = +x.value; return Date.UTC(p.year, p.month - 1, p.day, p.hour % 24, p.minute); };
+    let t = hedef - 3 * 36e5; for (let i = 0; i < 3; i++) t += hedef - yer(t); return new Date(t);
+  } catch (e) { return new Date(hedef - utcOfset(y, m - 1, g) * 36e5); }
+}
 function utcOfset(y, m, g) { if (y > 2016 || (y === 2016 && (m > 8 || (m === 8 && g >= 7)))) return 3; const ga = sonPazar(y, 2), ge = sonPazar(y, 9); return ((m > 2 && m < 9) || (m === 2 && g >= ga) || (m === 9 && g < ge)) ? 3 : 2; }
 const isaret = (lon) => Math.floor(norm(lon) / 30);
 const gezLon = (body, date) => Astronomy.Ecliptic(Astronomy.GeoVector(body, Astronomy.MakeTime(date), true)).elon;
@@ -320,7 +329,7 @@ function isaretler(L, temel, saatVar) {
 function hesapla() {
   const [y, m, g] = el("tarih").value.split("-").map(Number), saatYok = el("saatYok").checked || !el("saat").value;
   const [hh, mm] = saatYok ? [12, 0] : el("saat").value.split(":").map(Number), [lat, lon] = IL[sehirSec.value];
-  const date = new Date(Date.UTC(y, m - 1, g, hh - utcOfset(y, m - 1, g), mm)), t = Astronomy.MakeTime(date), B = Astronomy.Body;
+  const date = yerelUTC(y, m, g, hh, mm), t = Astronomy.MakeTime(date), B = Astronomy.Body;
   const L = { Gunes: Astronomy.SunPosition(t).elon, Ay: Astronomy.EclipticGeoMoon(t).lon, Merkur: gezLon(B.Mercury, date), Venus: gezLon(B.Venus, date), Mars: gezLon(B.Mars, date), Jupiter: gezLon(B.Jupiter, date), Saturn: gezLon(B.Saturn, date), Uranus: gezLon(B.Uranus, date), Neptun: gezLon(B.Neptune, date), Pluton: gezLon(B.Pluto, date) };
   const gunes = isaret(L.Gunes), ay = isaret(L.Ay), yuk = saatYok ? null : isaret(yukselen(date, lat, lon));
   const kuzey = isaret(dugum(date)), guney = (kuzey + 6) % 12, temel = yuk ?? gunes, ev = (b) => (b - temel + 12) % 12;
