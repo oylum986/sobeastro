@@ -28,9 +28,12 @@ h1 em{color:var(--altin)}
 @keyframes gel{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .ilerleme{height:3px;background:var(--cizgi);border-radius:3px;margin-bottom:18px;overflow:hidden}.ilerleme i{display:block;height:100%;width:0;background:var(--altin);transition:width .4s}
 label{display:block;font-size:13px;color:var(--soluk);margin:14px 0 6px}
-input,select{width:100%;padding:14px;border-radius:12px;border:1px solid var(--cizgi);background:#fffaf0;color:var(--murekkep);font:inherit;font-size:16px}
-.satir{display:flex;gap:10px}.satir>div{flex:1}
-.kutu{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--soluk);margin-top:10px}.kutu input{width:auto;margin-top:3px}
+input,select{display:block;width:100%;max-width:100%;min-width:0;height:52px;-webkit-appearance:none;appearance:none;padding:0 14px;text-align:left;border-radius:12px;border:1px solid var(--cizgi);background:#fffaf0;color:var(--murekkep);font:inherit;font-size:16px}
+.satir{display:flex;gap:10px}.satir>div{flex:1;min-width:0}
+input::-webkit-date-and-time-value{text-align:left}
+select{background-image:linear-gradient(45deg,transparent 50%,#6f6151 50%),linear-gradient(135deg,#6f6151 50%,transparent 50%);background-position:calc(100% - 20px) 23px,calc(100% - 15px) 23px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+@media(max-width:520px){.satir{display:block}}
+.kutu{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--soluk);margin-top:10px}.kutu input{width:18px;height:18px;flex:0 0 18px;padding:0;margin-top:2px;-webkit-appearance:checkbox;appearance:auto}
 button{width:100%;margin-top:20px;padding:16px;border:0;border-radius:14px;background:var(--murekkep);color:#f6eedd;font:600 16px Poppins,sans-serif;cursor:pointer}
 .soru{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:30px;line-height:1.15;margin-bottom:14px}
 .secim{display:block;text-align:left;margin:10px 0 0;padding:16px;border-radius:12px;background:#fffaf0;border:1px solid var(--cizgi);color:var(--murekkep);font:400 15px Poppins,sans-serif}
@@ -137,6 +140,60 @@ const ALAN = ["kimliğin ve bedenin","paran ve öz değerin","iletişimin ve yak
 const SORU = {alan:["Aşk ve ilişkiler","İş ve para","Aile","Kendimle ilgili"],dejavu:["Evet, sık sık","Bazen","Hiç olmadı"],ihtiyac:["Netlik","Cesaret","Huzur"]};
 const RITUEL = {Netlik:"Yeni ay akşamı bir kâğıda tek bir soru yaz; cevabı düşünmeden altına ilk gelen kelimeyi not et ve kâğıdı bir ay sakla.",Cesaret:"Bu hafta her sabah aynaya bakıp “Benim sıram geldi” de ve gün içinde ertelediğin tek bir şeyi yap.",Huzur:"Dolunay gecesi bir bardak suyu ay ışığına bırak; sabah kimseyle konuşmadan iç ve bırakmak istediğin şeyi içinden söyle."};
 
+
+/* ---------- ruhsal astroloji anlatısı (kitap dili) ---------- */
+const BURC_DE = ["Koç'ta","Boğa'da","İkizler'de","Yengeç'te","Aslan'da","Başak'ta","Terazi'de","Akrep'te","Yay'da","Oğlak'ta","Kova'da","Balık'ta"];
+const GECMIS_ANLATI = [
+ "Ruhun bu dünyaya savaş meydanlarından geliyor. Geçmiş yaşamlarında asker, kâşif ya da tek başına hayatta kalmak zorunda olan bir öncüydün; kimseye güvenmeden karar verip ilk adımı atan hep sendin. Ruhun orada cesareti öğrendi ama birlikte olmanın güvenini hiç tatmadı.",
+ "Ruhun bu dünyaya topraktan, bağ bahçeden geliyor. Geçmiş yaşamlarında çiftçi, zanaatkâr ya da emeğiyle servet biriktiren bir tüccardın; elinle yarattığın her şeyi korumak senin için hayatta kalmak demekti. Ruhun sabrı ve bolluğu öğrendi ama kaybetmekten hep korktu.",
+ "Ruhun bu dünyaya pazar yerlerinden, yollardan ve mektuplardan geliyor. Geçmiş yaşamlarında katip, haberci ya da şehir şehir dolaşan bir tüccardın; herkesin haberini sen taşıdın, herkesin dilini sen konuştun. Ruhun zekâyı öğrendi ama hiçbir yere ve hiçbir inanca tam bağlanmadı.",
+ "Ruhun bu dünyaya kalabalık bir evin mutfağından geliyor. Geçmiş yaşamlarında ebe, aile reisi ya da başkalarının çocuklarını büyüten kişiydin; herkesin karnını doyuran, herkesin yarasını saran sendin. Ruhun şefkati öğrendi ama kendi ihtiyaçlarını hep sona bıraktı.",
+ "Ruhun bu dünyaya sahnelerden ve saray salonlarından geliyor. Geçmiş yaşamlarında kraliçe ya da kral, oyuncu, dansöz ya da alkışlarla yaşayan bir soyluydun; görülmek ve sevilmek senin varoluş biçimindi. Ruhun ışık saçmayı öğrendi ama ilgi azaldığında kendini değersiz hissetti.",
+ "Ruhun bu dünyaya şifahanelerden ve tapınak avlularından geliyor. Geçmiş yaşamlarında şifacı, hemşire, şifalı ot toplayan ya da efendisine kusursuz hizmet eden bir yardımcıydın; her şeyin doğru ve temiz olması senin göreviydi. Ruhun hizmeti öğrendi ama kendine hiç izin vermedi.",
+ "Ruhun bu dünyaya saray bahçelerinden ve sanat atölyelerinden geliyor. Geçmiş yaşamlarında diplomat, saray danışmanı, ressam ya da güçlü birinin yanındaki eş ve yoldaştın; uyumu sağlamak ve güzelliği korumak senin işindi. Ruhun inceliği öğrendi ama kendi sesini hep başkalarına bıraktı.",
+ "Ruhun bu dünyaya sırlarla dolu odalardan geliyor. Geçmiş yaşamlarında simyacı, şaman, cerrah ya da ailenin ve kabilenin sırlarını bekleyen kişiydin; doğumla ölüm arasında çok kez durdun, çok kayıp gördün. Ruhun güçlü olmayı öğrendi ama güvenmeyi değil, korumayı öğrendi.",
+ "Ruhun bu dünyaya tapınaklardan ve uzak yollardan geliyor. Geçmiş yaşamlarında rahip, filozof, hacı ya da öğreti yayan gezgin bir öğretmendin; doğruyu bilen ve onu başkalarına anlatan kişi sendin. Ruhun inancı öğrendi ama başkalarının doğrusunu dinlemeyi ihmal etti.",
+ "Ruhun bu dünyaya taht odalarından ve kale duvarlarından geliyor. Geçmiş yaşamlarında hükümdar, general, vezir ya da başrahibeydin; binlerce insanın sorumluluğu omzundaydı ve hata yapma lüksün yoktu. Ruhun güçlü durmayı öğrendi ama ağlamayı unuttu.",
+ "Ruhun bu dünyaya gizli toplantılardan ve yıldız gözlemevlerinden geliyor. Geçmiş yaşamlarında mucit, devrimci, astrolog ya da zamanının ötesinde bir bilim insanıydın; topluluk ve gelecek için yaşadın. Ruhun özgürlüğü öğrendi ama kalbini kimseye tam açmadı.",
+ "Ruhun bu dünyaya manastırlardan ve tapınak sessizliğinden geliyor. Geçmiş yaşamlarında rahibe, keşiş, mistik ya da dualarla yaşayan bir şifacıydın; dünyadan elini çekip başkalarının acısı için dua ettin. Ruhun sonsuz şefkati öğrendi ama sınır koymayı hiç öğrenmedi."];
+const BUGUN = [
+ "Bu yüzden bugün hızlı karar verir, kimseye muhtaç olmamak için çabalarsın; yardım istemek sana yenilgi gibi gelir.",
+ "Bu yüzden bugün değişimden hoşlanmaz, sahip olduklarına sıkı sıkı tutunursun; güvende hissetmeden adım atamazsın.",
+ "Bu yüzden bugün aklın hep bir sonraki bilgide, bir sonraki konuşmada; bir şeye derinlemesine bağlanmak seni zorlar.",
+ "Bu yüzden bugün herkesin annesi gibisin; başkalarının yükünü omzuna alır, kendi ihtiyacını söylemekte zorlanırsın.",
+ "Bu yüzden bugün takdir edilmediğinde içinde bir ışık söner; sevilmek için kendini kanıtlamaya çalışırsın.",
+ "Bu yüzden bugün her şeyin kusursuz olmasını istersin; dinlenirken bile suçluluk duyar, kendini eleştirirsin.",
+ "Bu yüzden bugün herkesi memnun etmeye çalışır, çatışmadan kaçarsın; ne istediğini söylemek sana zor gelir.",
+ "Bu yüzden bugün bir odaya girdiğinde kimin neyi sakladığını sezersin; insanlar sana sırlarını anlatır ama sen kendininkini kolay açmazsın.",
+ "Bu yüzden bugün haklı olduğundan emin olur, cevabı hep uzaklarda ararsın; küçük ayrıntılar ve gündelik konuşmalar seni sıkar.",
+ "Bu yüzden bugün yaşından olgun görünür, güçlü durmak zorunda hissedersin; duygularını göstermek sana zayıflık gibi gelir.",
+ "Bu yüzden bugün kalabalıklar içinde bile kendini farklı hissedersin; yakınlık arttıkça uzaklaşma isteğin de artar.",
+ "Bu yüzden bugün başkalarının acısını kendi acın gibi hissedersin; hayır demek ve sınır koymak seni yorar."];
+const KUZEY_ANLATI = [
+ "Bu yaşamda ruhun, başkalarının onayını beklemeden kendi adına karar vermeyi deneyimlemek için geldi. “Ben” demekten korkmadığında, kendi yolunu çizdiğinde kaderin hızlanır.",
+ "Bu yaşamda ruhun krizlerden beslenmeyi bırakıp sakin ve somut bir şey inşa etmeyi deneyimlemek için geldi: kendi değerini, kendi bahçeni, kendi huzurunu. Saklanmayı değil, emeğinin görünmesini seçtiğinde kaderin açılır.",
+ "Bu yaşamda ruhun tek doğruyu bırakıp merak etmeyi, sormayı ve dinlemeyi deneyimlemek için geldi. Kelimeler ve yakın çevren senin yeni öğretmenin.",
+ "Bu yaşamda ruhun zırhını indirip kırılgan olmayı, bir yuva kurup kök salmayı deneyimlemek için geldi. Duygularını gösterdiğinde gerçek gücünü bulacaksın.",
+ "Bu yaşamda ruhun kalabalığın içinden çıkıp kendi kalbini ortaya koymayı deneyimlemek için geldi. Sevmekten, yaratmaktan ve görünmekten korkmadığında parlarsın.",
+ "Bu yaşamda ruhun hayalden gerçeğe inmeyi deneyimlemek için geldi: düzen kurmak, bedenine iyi bakmak ve somut işler çıkarmak. Ayakların yere bastıkça ruhun özgürleşir.",
+ "Bu yaşamda ruhun tek başına savaşmayı bırakıp birlikte olmayı deneyimlemek için geldi. Bir ortaklıkta, bir sevgide yumuşadığında hayat sana kapı açar.",
+ "Bu yaşamda ruhun sahip olduklarına tutunmayı bırakıp derin bağ kurmayı, paylaşmayı ve dönüşmeyi deneyimlemek için geldi. Bıraktıkça büyüyeceksin.",
+ "Bu yaşamda ruhun bilgiyi bilgeliğe çevirmeyi, kendi inancını bulmayı ve ufkunu genişletmeyi deneyimlemek için geldi. Yola çıktığında ruhun eve döner.",
+ "Bu yaşamda ruhun başkalarını korumaktan çıkıp kendi hayatının otoritesi olmayı deneyimlemek için geldi. Hedef koyup sorumluluğu üstlendiğinde ruhun rahatlar.",
+ "Bu yaşamda ruhun kişisel dramlardan çıkıp topluluk için özgün sesini kullanmayı deneyimlemek için geldi. Farklılığını sakladığında sönersin, paylaştığında çoğalırsın.",
+ "Bu yaşamda ruhun kontrolü bırakıp sezgisine ve akışa güvenmeyi deneyimlemek için geldi. Kusursuzluğu bıraktığında ruhun şifa bulur."];
+const GECMIS_EV = ["sen vardın: kendi bedenin, kendi gücün, kendi hayatta kalışın","para, mülk ve sahip olduklarını korumak vardı","kardeşlerin, yakın çevren ve sözlerin vardı","ev, aile ve atalarının sırları vardı","aşk, çocuklar ve yaratıcılık vardı","hizmet etmek, çalışmak ve başkalarının bedenini iyileştirmek vardı","bir eş ya da ortak vardı; hayatın hep birinin yanında şekillendi","ölüm, miras, başkalarının parası ve sırları vardı","inanç, yolculuk ve öğreti vardı","statü, görev ve toplumun gözündeki yerin vardı","topluluklar, dostluklar ve ortak idealler vardı","inziva, tapınaklar, şifahaneler ya da kimsenin görmediği fedakârlıklar vardı"];
+const DUGUM_GEZ = {
+ Saturn: "Satürn Güney Düğümünün tam üzerinde: geçmiş yaşamdan ağır bir görev, bir yalnızlık ya da bitmemiş bir sorumluluk taşıyorsun; bu yüzden hayat sana erken yaşta yük verdi.",
+ Pluton: "Plüton Güney Düğümünün tam üzerinde: geçmiş yaşamında büyük bir güç, ani bir kayıp ya da sert bir son yaşamış olabilirsin; ruhun bu hayatta güvende olmayı yeniden öğreniyor.",
+ Venus: "Venüs Güney Düğümünün tam üzerinde: geçmiş yaşamdan gelen bir aşk, ilk görüşte tanıdık gelen bir ruh eşi bu hayatta yeniden karşına çıkabilir.",
+ Mars: "Mars Güney Düğümünün tam üzerinde: geçmiş yaşamdan yarım kalmış bir savaş, bastırılmış bir öfke taşıyorsun; bu hayatta onu cesarete dönüştürmen isteniyor.",
+ Ay: "Ay Güney Düğümünün tam üzerinde: geçmiş yaşamdan gelen bir anne bağı ve çok tanıdık duygular; bazı insanları ilk görüşte tanırsın.",
+ Neptun: "Neptün Güney Düğümünün tam üzerinde: geçmiş yaşamında güçlü bir ruhsal yetenek, bir manastır hayatı ya da büyük bir fedakârlık var.",
+ Uranus: "Uranüs Güney Düğümünün tam üzerinde: geçmiş yaşamında ani bir kopuş, bir sürgün ya da zamanının ötesindeki fikirlerin yüzünden dışlanmışlık yaşamış olabilirsin.",
+ Gunes: "Güneş Güney Düğümünün tam üzerinde: geçmiş yaşamında önemli ve tanınan biriydin; bu hayatta o tanıdık rolü bırakmak sana zor gelebilir."};
+const cumle = (s, i) => (s.match(/[^.!?]+[.!?]/g) || [s])[i]?.trim() || "";
+
 /* ---------- haritadaki belirgin işaretler: zor açılar ve çarpıcı yerleşimler ---------- */
 const GEZ = { Gunes: "Güneş", Ay: "Ay", Merkur: "Merkür", Venus: "Venüs", Mars: "Mars", Jupiter: "Jüpiter", Saturn: "Satürn", Uranus: "Uranüs", Neptun: "Neptün", Pluton: "Plüton" };
 const ACI = { 0: "kavuşum yapıyor (birleşiyor)", 90: "kare açı yapıyor", 180: "karşıt açı yapıyor" };
@@ -214,7 +271,8 @@ function hesapla() {
   let jYil = yil - 12; for (let k = 10; k <= 13; k++) if (isaret(gezLon(B.Jupiter, new Date(Date.UTC(yil - k, 6, 1)))) === jup) { jYil = yil - k; break; }
   let sYil = null; for (let k = 27; k <= 31; k++) if (isaret(gezLon(B.Saturn, new Date(Date.UTC(yil - k, 6, 1)))) === sat) { sYil = yil - k; break; }
   const dongu12 = []; for (let k = 0; k < 12; k++) { const yy = yil - 6 + k; dongu12.push([yy, ev(isaret(gezLon(B.Jupiter, new Date(Date.UTC(yy, 6, 1)))))]); }
-  Object.assign(d, { dogum: el("tarih").value, saat: saatYok ? "" : el("saat").value, sehirAd: sehirSec.value, gunes, ay, yuk, kuzey, guney, yil, jYil, sYil, dogYil: y, jEv: ev(jup), sEv: ev(sat), kEv: ev(kz), dongu12, isr: isaretler(L, temel, !saatYok) });
+  const gLon = norm(dugum(date) + 180), dgz = Object.keys(DUGUM_GEZ).filter((k) => { const f = Math.abs(((L[k] - gLon + 540) % 360) - 180); return f <= 8; });
+  Object.assign(d, { L, temel, saatVar: !saatYok, dgz, gEv: ev(guney), kEvN: ev(kuzey), dogum: el("tarih").value, saat: saatYok ? "" : el("saat").value, sehirAd: sehirSec.value, gunes, ay, yuk, kuzey, guney, yil, jYil, sYil, dogYil: y, jEv: ev(jup), sEv: ev(sat), kEv: ev(kz), dongu12, isr: isaretler(L, temel, !saatYok) });
 }
 function ileri0() {
   if (!el("tarih").value) { el("hata0").textContent = "Lütfen doğum tarihini gir."; return; }
@@ -231,7 +289,12 @@ function metin() {
   const karma = yasS >= 18 ? `${lok(d.sYil)} ${ALAN[d.sEv]} alanında yaşadığın sınav, bu yıl karmik bir kapanışla yeniden önüne geliyor; o zaman yarım kalanı şimdi tamamlıyorsun.` : `Satürn şu an ${ALAN[d.sEv]} alanından geçiyor; burada sabır ve olgunluk sınavı var, acele etme.`;
   const a = d.isr.acilar[0], y0 = d.isr.yer[0];
   const isaretMetin = a ? { bas: OZEL[`${a.a}-${a.b}`][0], t: `Haritanda ${GEZ[a.a]} ile ${GEZ[a.b]} ${ACI[a.hedef]}. ${OZEL[`${a.a}-${a.b}`][1]}` } : y0 ? { bas: `${GEZ[y0.p]} ${y0.ev}. evde`, t: y0.t } : { bas: "Uyumlu bir harita", t: "Haritanda sert açılar az; hayatın büyük kırılmalardan çok yavaş ve sağlam adımlarla şekilleniyor." };
-  return { yukAd, dongu, karma, isaretMetin, kader: `Kader ekseni şu an ${ALAN[d.kEv]} alanından geçiyor; bu yıl orada karmik kapılar açılıyor.` };
+  const evOf = (k) => (isaret(d.L[k]) - d.temel + 12) % 12;
+  const gecmis = GECMIS_ANLATI[d.guney] + (d.saatVar ? ` Bu hayatların merkezinde ${GECMIS_EV[d.gEv]}.` : "") + (d.dgz.length ? " " + DUGUM_GEZ[d.dgz[0]] : "");
+  let bugun = BUGUN[d.guney];
+  if (a) { const sa = isaret(d.L[a.a]), sb = isaret(d.L[a.b]); bugun += ` Haritanın en güçlü işareti: ${GEZ[a.a]} ${BURC_DE[sa]}, ${GEZ[a.b]} ${BURC_DE[sb]} ve ikisi ${ACI[a.hedef].split(" (")[0]}. ${OZEL[`${a.a}-${a.b}`][1]}` + (d.saatVar ? ` Bu hikâye en çok hayatının ${ALAN[evOf(a.a)]} alanında yaşanıyor.` : "") + ((sa === d.guney || sb === d.guney) ? " Ruhun bu duyguyu çok önceden tanıyordu." : ""); }
+  const simdi = `Kuzey Düğümün ${BURC_DE[d.kuzey]}${d.saatVar ? ` ve ${d.kEvN + 1}. evinde` : ""}. ` + KUZEY_ANLATI[d.kuzey] + (d.saatVar ? ` Bu dersin sahnesi hayatının ${ALAN[d.kEvN]} alanı; kapıların en çok burada açılacak.` : "");
+  return { gecmis, bugun, simdi, yukAd, dongu, karma, isaretMetin, kader: `Kader ekseni şu an ${ALAN[d.kEv]} alanından geçiyor; bu yıl orada karmik kapılar açılıyor.` };
 }
 function detay() {
   const M = metin(), G = GECMIS[d.guney], S = SIMDI[d.kuzey], rol = (a) => `<div class="roller">${a.map((x) => `<span>${x}</span>`).join("")}</div>`;
@@ -239,8 +302,9 @@ function detay() {
   const yerler = d.isr.yer.slice(0, 2).map((y) => `<p>${y.t}</p>`).join("");
   el("detay").innerHTML = `
   <div class="bolum"><h4>SEN</h4><h3>${M.yukAd ? "Yükselen " + M.yukAd : "Güneş " + BURC[d.gunes]}</h3><p>${M.yukAd ? YUK[d.yuk] : "Doğum saatin olmadığı için yorum Güneş burcun üzerinden yapıldı."} Güneşin ${BURC[d.gunes]}, Ay'ın ${BURC[d.ay]}: ${AY[d.ay]}</p></div>
-  <div class="bolum"><h4>GEÇMİŞ HAYATLARIN · Güney Ay Düğümü ${BURC[d.guney]}</h4><h3>Bir zamanlar…</h3>${rol(G.rol)}<p>${G.t}</p>${d.cevap.dejavu === "Evet, sık sık" ? "<p>Bazı yerlere ve insanlara duyduğun açıklanamaz yakınlık, ruhsal astrolojide bu geçmiş hayat izlerine bağlanır.</p>" : ""}</div>
-  <div class="bolum"><h4>BU HAYATTA OLABİLECEKLERİN · Kuzey Ay Düğümü ${BURC[d.kuzey]}</h4><h3>Ruhunun sınavı</h3>${rol(S.rol)}<p>${S.t}</p></div>
+  <div class="bolum"><h4>GEÇMİŞ YAŞAMIN · Güney Ay Düğümü ${BURC[d.guney]}</h4><h3>Bir zamanlar…</h3>${rol(G.rol)}<p>${M.gecmis}</p>${d.cevap.dejavu === "Evet, sık sık" ? "<p>Bazı yerlere ve insanlara duyduğun açıklanamaz yakınlık bu geçmiş yaşam izlerinden geliyor; ruhun onları tanıyor.</p>" : ""}</div>
+  <div class="bolum"><h4>BU YÜZDEN BUGÜN</h4><h3>Neden böylesin</h3><p>${M.bugun}</p></div>
+  <div class="bolum"><h4>BU YAŞAMDA DENEYİMLEMEN GEREKEN · Kuzey Ay Düğümü ${BURC[d.kuzey]}</h4><h3>Ruhunun sınavı</h3>${rol(S.rol)}<p>${M.simdi}</p><p>${S.t}</p></div>
   <div class="bolum"><h4>HARİTANDAKİ BELİRGİN İŞARETLER</h4><h3>${M.isaretMetin.bas}</h3>${acilar || ""}${yerler || ""}${!acilar && !yerler ? `<p>${M.isaretMetin.t}</p>` : ""}</div>
   <div class="bolum"><h4>DÖNGÜN · ${d.yil}</h4><h3>Karma ve zamanlama</h3><p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p></div>`;
 }
@@ -270,9 +334,9 @@ function kartCiz() {
     if (buyuk) { g.fillStyle = INK; g.font = "600 44px 'Cormorant Garamond'"; y += sar(g, buyuk, W / 2, y, 860, 50) + 4; }
     g.fillStyle = "#3d342b"; g.font = "300 27px Poppins"; y += sar(g, yazi, W / 2, y, 850, 39) + 22; cizgi(y); y += 64;
   };
-  bolum("GEÇMİŞ HAYATLARINDA", G.rol.join(" · "), G.t);
-  bolum("BU HAYATTA OLABİLECEKLERİN", S.rol.join(" · "), S.t);
-  bolum("HARİTANDAKİ İŞARET", M.isaretMetin.bas, M.isaretMetin.t);
+  bolum("GEÇMİŞ YAŞAMINDA", G.rol.join(" · "), cumle(GECMIS_ANLATI[d.guney], 1) + " " + cumle(GECMIS_ANLATI[d.guney], 2));
+  bolum("BU YÜZDEN BUGÜN", M.isaretMetin.bas, BUGUN[d.guney].replace(/^Bu yüzden bugün /, "Bugün ") + " " + cumle(M.isaretMetin.t, 0) + " " + cumle(M.isaretMetin.t, 1));
+  bolum("BU YAŞAMDA DENEYİMLEMEN GEREKEN", S.rol.join(" · "), cumle(KUZEY_ANLATI[d.kuzey], 0) + " " + cumle(KUZEY_ANLATI[d.kuzey], 1));
   g.fillStyle = INK; g.font = "italic 600 40px 'Cormorant Garamond'"; g.fillText("Sen de haritanı ücretsiz çıkar", W / 2, H - 165);
   g.fillStyle = ALT; g.font = "600 30px Poppins"; g.fillText("harita.joinsobe.com  ·  @sobeastro", W / 2, H - 118);
 }
@@ -295,8 +359,9 @@ function raporHtml() {
   return `<div style="font-family:Arial,sans-serif;color:#2a241f;background:#f7efdf;padding:22px;max-width:580px;margin:auto;line-height:1.6">
   <div style="text-align:center"><img src="${SITE}/logo.png" width="110" alt="SobeAstro"><h2 style="font-family:Georgia,serif;margin:8px 0">✦ Doğum Haritan ✦</h2></div>
   <p>${M.yukAd ? `Yükselenin <b>${M.yukAd}</b>. ${YUK[d.yuk]}` : `Doğum saatin olmadığı için yorum Güneş burcun <b>${BURC[d.gunes]}</b> üzerinden yapıldı.`} Güneşin <b>${BURC[d.gunes]}</b>, Ay'ın <b>${BURC[d.ay]}</b>: ${AY[d.ay]}</p>
-  ${b("Geçmiş hayatların")}<p><b>${G.rol.join(" · ")}</b></p><p>Ruhsal astrolojide Güney Ay Düğümü, ruhun geçmişten getirdiği yetenekleri ve alışkanlıkları anlatır. Seninki <b>${BURC[d.guney]}</b>'te. ${G.t}</p>
-  ${b("Bu hayatta olabileceklerin ve sınavın")}<p><b>${S.rol.join(" · ")}</b></p><p>Kuzey Ay Düğümün <b>${BURC[d.kuzey]}</b>'te. ${S.t}</p>
+  ${b("Geçmiş yaşamın")}<p><b>${G.rol.join(" · ")}</b></p><p>Ruhsal astrolojide Güney Ay Düğümü, ruhun geçmiş yaşamlardan getirdiği yetenekleri ve alışkanlıkları anlatır. Seninki <b>${BURC[d.guney]}</b>'te.</p><p>${M.gecmis}</p>
+  ${b("Bu yüzden bugün")}<p>${M.bugun}</p>
+  ${b("Bu yaşamda deneyimlemen gereken")}<p><b>${S.rol.join(" · ")}</b></p><p>${M.simdi}</p><p>${S.t}</p>
   ${b("Haritandaki belirgin işaretler")}${acilar || `<p>${M.isaretMetin.t}</p>`}
   ${b("Döngü yılların")}<p>${M.dongu}</p><p>${M.karma}</p><p>${M.kader}</p>
   <p>Jüpiter'in 12 yıllık turu (her yıl hayatının hangi alanı büyüyor):</p><table style="border-collapse:collapse;font-size:14px">${tablo}</table>
@@ -308,7 +373,7 @@ async function gonder() {
   const e = el("eposta").value.trim(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)) { el("hata5").textContent = "Geçerli bir e-posta yaz."; return; }
   if (!el("izin").checked) { el("hata5").textContent = "Raporu gönderebilmemiz için izin kutusunu işaretle."; return; }
   el("hata5").textContent = "";
-  const veri = { eposta: e, dogum: d.dogum, saat: d.saat, sehir: d.sehirAd, gunes: BURC[d.gunes], ay: BURC[d.ay], yukselen: d.yuk === null ? "" : BURC[d.yuk], cevaplar: d.cevap, konu: "Doğum haritan hazır ✦", rapor: raporHtml() };
+  const veri = { eposta: e, dogum: d.dogum, saat: d.saat, sehir: d.sehirAd, gunes: BURC[d.gunes], ay: BURC[d.ay], yukselen: d.yuk === null ? "" : BURC[d.yuk], cevaplar: { ...d.cevap, guneyDugum: BURC[d.guney], kuzeyDugum: BURC[d.kuzey], isaret: metin().isaretMetin.bas, guneyDugumGezegen: d.dgz.join(",") }, konu: "Doğum haritan hazır ✦", rapor: raporHtml() };
   try { await fetch(GONDER_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(veri) }); } catch (er) {}
   el("tamam").style.display = "block";
 }
