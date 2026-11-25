@@ -197,7 +197,7 @@ function yukselen(date, lat, lon) { const t = Astronomy.MakeTime(date), T = t.tt
 function isaretler(L, temel, saatVar) {
   const kisi = ["Gunes", "Ay", "Merkur", "Venus", "Mars"], agir = ["Saturn", "Uranus", "Neptun", "Pluton"], agirlik = { Ay: 2.2, Gunes: 2, Venus: 1.6, Mars: 1.4, Merkur: 0.8 }, liste = [];
   const ciftler = []; kisi.forEach((a) => agir.forEach((b) => ciftler.push([a, b]))); ciftler.push(["Mars", "Saturn"]);
-  for (const [a, b] of ciftler) { const fark = Math.abs(((L[a] - L[b] + 540) % 360) - 180), aci = 180 - fark;
+  for (const [a, b] of ciftler) { const aci = Math.abs(((L[a] - L[b] + 540) % 360) - 180);
     for (const hedef of [0, 90, 180]) { const orb = Math.abs(aci - hedef), sinir = a === "Ay" ? 7 : 6; if (orb <= sinir && OZEL[`${a}-${b}`]) liste.push({ a, b, hedef, orb, skor: (sinir - orb) + (agirlik[a] || 1) * 2 + (hedef === 90 ? 1 : 0) }); } }
   liste.sort((x, y) => y.skor - x.skor);
   const yer = []; if (saatVar) for (const p of ["Pluton", "Saturn", "Mars", "Neptun", "Uranus"]) { const ev = ((isaret(L[p]) - temel + 12) % 12) + 1, k = `${p}-${ev}`; if (YER[k]) yer.push({ p, ev, t: YER[k] }); }
